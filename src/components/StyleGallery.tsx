@@ -29,7 +29,7 @@ const StyleGallery = () => {
   ];
 
   return (
-    <section className="py-20 bg-background">
+    <section className="py-20 bg-luxury-green">
       <div className="max-w-7xl mx-auto px-8">
         <div className="flex items-center justify-between mb-12">
           <div>
@@ -53,8 +53,11 @@ const StyleGallery = () => {
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {styles.map((style, index) => (
-            <Card key={index} className="bg-card border-luxury-brown/20 overflow-hidden group hover:shadow-2xl transition-all duration-300">
-              <div className={`aspect-[4/5] ${style.image} relative`}>
+            <Card key={index} className="bg-card border-luxury-brown/20 overflow-hidden group hover:shadow-2xl transition-all duration-300 relative">
+              <div className={`aspect-[4/5] ${style.image} relative`} 
+                   style={{
+                     clipPath: 'polygon(0 15%, 50% 0, 100% 15%, 100% 100%, 0 100%)'
+                   }}>
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
                 <div className="absolute top-4 left-4">
                   <Badge variant="secondary" className="bg-luxury-gold text-luxury-dark">

@@ -56,7 +56,8 @@ export default {
 					gold: 'hsl(var(--luxury-gold))',
 					dark: 'hsl(var(--luxury-dark))',
 					beige: 'hsl(var(--luxury-beige))',
-					brown: 'hsl(var(--luxury-brown))'
+					brown: 'hsl(var(--luxury-brown))',
+					green: 'hsl(var(--luxury-green))'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
