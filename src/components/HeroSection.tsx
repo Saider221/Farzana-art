@@ -72,6 +72,7 @@ const HeroSection = () => {
                       <Sparkles className="h-12 w-12 text-luxury-gold" />
                     </div>
                     <p className="text-luxury-beige text-sm font-medium">Узоры пустыни</p>
+                    
                   </div>
                 </div>
               </div>

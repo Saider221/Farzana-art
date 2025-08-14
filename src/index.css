@@ -59,8 +59,62 @@ All colors MUST be HSL.
     --sidebar-border: 220 13% 91%;
 
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* Delivery Section Colors */
+    --delivery-bg: 22 35% 35%;
+    --delivery-text: 0 0% 100%;
+    --delivery-accent: 35 25% 75%;
+    
+    /* About Section Colors */
+    --about-bg: 35 25% 91%;
+    --about-text: 25 35% 25%;
+    --about-accent: 22 35% 35%; 
+    
+  }
+  .gallery-section {
+    /* Scoped color system for GallerySection */
+    --background: 45 20% 95%;
+    --foreground: 25 15% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 25 15% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 25 15% 15%;
+
+    --primary: 25 15% 15%;
+    --primary-foreground: 45 20% 95%;
+
+    --secondary: 45 15% 88%;
+    --secondary-foreground: 25 15% 15%;
+
+    --muted: 45 15% 90%;
+    --muted-foreground: 25 10% 45%;
+
+    --accent: 35 25% 85%;
+    --accent-foreground: 25 15% 15%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 35 15% 85%;
+    --input: 35 15% 85%;
+    --ring: 25 15% 15%;
+
+    /* Gallery specific colors */
+    --gallery-bg: 45 20% 95%;
+    --price-color: 25 15% 25%;
+    --button-bg: 0 0% 100%;
+    --button-border: 25 15% 80%;
+
+    /* Subtle mount animation */
+    animation: gallery-fade-in 400ms ease-out both;
   }
 
+  @keyframes gallery-fade-in {
+    0% { opacity: 0; transform: translateY(8px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
   .dark {
     --background: 222.2 84% 4.9%;
     --foreground: 210 40% 98%;
