@@ -109,12 +109,8 @@ const AboutSection = () => {
           </div>
         </div>
 
-        {/* Collaborations Section */}
-        <div className="text-center">
-          <h2 className="text-4xl font-bold" style={{ color: 'hsl(var(--about-text))' }}>
-            КОЛЛАБОРАЦИИ
-          </h2>
-        </div>
+        
+        
       </div>
     </section>
   );
