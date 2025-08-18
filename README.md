@@ -1,73 +1,94 @@
-# Welcome to your Lovable project
+# Farzana Art Gallery
 
-## Project info
+Онлайн-галерея картин художницы Farzana.
 
-**URL**: https://lovable.dev/projects/c833b90d-07f0-455a-83d4-d1c4e381ed00
+## Описание
 
-## How can I edit this code?
+Этот проект представляет собой веб-приложение для отображения и продажи картин художницы Farzana. Проект включает в себя каталог картин, возможность просмотра деталей каждой картины и тестовую систему оплаты через Robokassa.
 
-There are several ways of editing your application.
+## Технологии
 
-**Use Lovable**
+- Фронтенд: React, TypeScript, Vite, Tailwind CSS
+- Бэкенд: Vercel Serverless Functions
+- База данных: PostgreSQL (через Prisma)
+- Платежная система: Robokassa (тестовый режим)
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/c833b90d-07f0-455a-83d4-d1c4e381ed00) and start prompting.
+## Установка и запуск
 
-Changes made via Lovable will be committed automatically to this repo.
+1. Клонируйте репозиторий:
+   ```bash
+   git clone <repository-url>
+   cd Farzana-art-1
+   ```
 
-**Use your preferred IDE**
+2. Установите зависимости:
+   ```bash
+   npm install
+   ```
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+3. Настройте переменные окружения:
+   Создайте файл `.env` в папке `backend` со следующим содержимым:
+   ```
+   DATABASE_URL=your_database_url
+   ROBOKASSA_LOGIN=your_robokassa_login
+   ROBOKASSA_PASSWORD1=your_robokassa_password1
+   ROBOKASSA_PASSWORD2=your_robokassa_password2
+   ```
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+4. Запустите приложение в режиме разработки:
+   ```bash
+   npm run dev
+   ```
 
-Follow these steps:
+## Деплой на Vercel
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+Проект готов к деплою на Vercel. Для этого:
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+1. Создайте аккаунт на [Vercel](https://vercel.com/)
+2. Подключите репозиторий к Vercel
+3. Установите переменные окружения в настройках проекта на Vercel:
+   - `DATABASE_URL`
+   - `ROBOKASSA_LOGIN`
+   - `ROBOKASSA_PASSWORD1`
+   - `ROBOKASSA_PASSWORD2`
+4. Vercel автоматически задеплоит проект
 
-# Step 3: Install the necessary dependencies.
-npm i
+**ВАЖНО:** Файл `.env` не должен коммититься в репозиторий и содержится только локально у разработчика.
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+## Структура проекта
 
-**Edit a file directly in GitHub**
+- `src/` - Фронтенд приложение (React, TypeScript)
+- `api/` - Serverless функции для API (Vercel)
+- `public/` - Статические файлы
+- `prisma/` - Конфигурация Prisma (ORM)
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Тестирование платежной системы
 
-**Use GitHub Codespaces**
+Для тестирования оплаты используйте следующие данные:
+- Номер карты: 4242424242424242
+- Месяц/Год: любая будущая дата
+- CVV: 123
+- Имя владельца: любое имя
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Рекомендации по базе данных
 
-## What technologies are used for this project?
+Для продакшена рекомендуется использовать одну из следующих облачных баз данных:
 
-This project is built with:
+1. **Neon** - Serverless PostgreSQL, отлично подходит для Vercel
+2. **Supabase** - Firebase-альтернатива с PostgreSQL
+3. **Railway** - Универсальная платформа для деплоя приложений и баз данных
+4. **PlanetScale** - Serverless MySQL (если предпочитаете MySQL)
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Все эти сервисы предоставляют бесплатные тарифы для разработки.
 
-## How can I deploy this project?
+## Разработка
 
-Simply open [Lovable](https://lovable.dev/projects/c833b90d-07f0-455a-83d4-d1c4e381ed00) and click on Share -> Publish.
+### Команды
 
-## Can I connect a custom domain to my Lovable project?
+- `npm run dev` - Запуск проекта в режиме разработки
+- `npm run build` - Сборка проекта для продакшена
+- `npm run lint` - Проверка кода с помощью ESLint
 
-Yes, you can!
+## Лицензия
 
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
+MIT

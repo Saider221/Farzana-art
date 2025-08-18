@@ -7,6 +7,8 @@ import CollaborationsSection from "@/components/CollaborationsSection";
 import ReviewsSection from "@/components/ReviewsSection";
 import DeliverySection from "@/components/DeliverySection";
 import AboutSection from "@/components/AboutSection";
+import FooterContacts from "@/components/FooterContacts";
+import { Footer } from "react-day-picker";
 
 const Index = () => {
   return (
@@ -21,6 +23,7 @@ const Index = () => {
         <ReviewsSection />
         <DeliverySection/>
         <AboutSection/>
+        <FooterContacts/>
       </main>
     </div>
   );

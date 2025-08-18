@@ -1,7 +1,11 @@
 import { Star, Plus, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import PaymentForm from "@/components/PaymentForm";
+import { useState } from "react";
 
 const HeroSection = () => {
+  const [showPayment, setShowPayment] = useState(false);
+
   return (
     <section className="min-h-screen bg-background relative overflow-hidden">
       {/* Decorative elements */}
@@ -42,12 +46,20 @@ const HeroSection = () => {
                 </p>
               </div>
               
-              <Button 
-                variant="outline" 
-                className="border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-300 px-8 py-3"
-              >
-                Подробная информация →
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button 
+                  variant="outline" 
+                  className="border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-300 px-8 py-3"
+                >
+                  Подробная информация →
+                </Button>
+                <Button 
+                  onClick={() => setShowPayment(true)}
+                  className="bg-luxury-gold text-luxury-dark hover:bg-luxury-gold/90 transition-all duration-300 px-8 py-3"
+                >
+                  Тестовая оплата
+                </Button>
+              </div>
             </div>
           </div>
           
@@ -80,6 +92,32 @@ const HeroSection = () => {
           </div>
         </div>
       </div>
+      
+      {/* Payment Modal */}
+      {showPayment && (
+        <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+          <div className="bg-white rounded-lg max-w-md w-full">
+            <div className="p-4 border-b">
+              <h3 className="text-xl font-bold">Тестовая оплата</h3>
+            </div>
+            <div className="p-4">
+              <PaymentForm 
+                amount={1000}
+                description="Тестовая оплата картины"
+              />
+            </div>
+            <div className="p-4 border-t">
+              <Button 
+                variant="outline" 
+                onClick={() => setShowPayment(false)}
+                className="w-full"
+              >
+                Закрыть
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };
