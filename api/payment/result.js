@@ -8,10 +8,10 @@ export default async function handler(req, res) {
   try {
     const { OutSum, InvId, SignatureValue } = req.body;
     
-    // Переменные окружения будут автоматически доступны на Vercel
+    
     const password2 = process.env.ROBOKASSA_PASSWORD2;
     
-    // Проверка наличия необходимой переменной окружения
+    
     if (!password2) {
       return res.status(500).send('Payment system not configured');
     }
@@ -19,18 +19,18 @@ export default async function handler(req, res) {
     // Формируем строку для хеширования
     const signatureString = `${OutSum}:${InvId}:${password2}`;
     
+    
     // Вычисляем хеш для проверки
     const expectedSignature = createHash('sha256')
       .update(signatureString)
       .digest('hex');
     
-    // Проверяем подпись
+    
     if (SignatureValue.toLowerCase() !== expectedSignature.toLowerCase()) {
       return res.status(400).send('Invalid signature');
     }
     
-    // Здесь должна быть логика обработки успешного платежа
-    // Например, обновление статуса заказа в БД
+    
     
     console.log(`Payment successful for order ${InvId}, amount: ${OutSum}`);
     

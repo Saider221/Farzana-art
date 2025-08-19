@@ -17,13 +17,13 @@ const Header = () => {
             Главная
           </a>
           <a href="#" className="text-foreground hover:text-luxury-gold transition-colors">
-            О нас
+            Обо мне
           </a>
           <a href="#" className="text-foreground hover:text-luxury-gold transition-colors">
-            Коллекции
+            Магазин
           </a>
           <a href="#" className="text-foreground hover:text-luxury-gold transition-colors">
-            Дизайнеры
+            Арт Терапия 
           </a>
           <a href="#" className="text-foreground hover:text-luxury-gold transition-colors">
             Контакты

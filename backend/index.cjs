@@ -125,8 +125,7 @@ app.post('/api/payment/result', (req, res) => {
       return res.status(400).send('Invalid signature');
     }
     
-    // Здесь должна быть логика обработки успешного платежа
-    // Например, обновление статуса заказа в БД
+    
     
     console.log(`Payment successful for order ${InvId}, amount: ${OutSum}`);
     
@@ -143,8 +142,7 @@ app.get('/api/payment/success', (req, res) => {
   try {
     const { OutSum, InvId } = req.query;
     
-    // Здесь может быть дополнительная логика после успешной оплаты
-    // Например, показ сообщения об успешной оплате
+   
     
     res.json({ 
       status: 'success',
@@ -158,13 +156,12 @@ app.get('/api/payment/success', (req, res) => {
   }
 });
 
-// Обработка неуспешной оплаты (Fail URL)
+
 app.get('/api/payment/fail', (req, res) => {
   try {
     const { OutSum, InvId } = req.query;
     
-    // Здесь может быть логика обработки отмены оплаты
-    // Например, показ сообщения об отмене
+    
     
     res.json({ 
       status: 'fail',

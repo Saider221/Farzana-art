@@ -1,7 +1,38 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { useState, useRef, useEffect } from "react";
 
 const ProductShowcase = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoError, setVideoError] = useState(false);
+  const [videoLoading, setVideoLoading] = useState(true);
+
+  const handleVideoError = () => {
+    setVideoError(true);
+    setVideoLoading(false);
+  };
+
+  const handleVideoLoad = () => {
+    setVideoLoading(false);
+    
+    if (videoRef.current) {
+      
+      setTimeout(() => {
+        videoRef.current?.play().catch(error => {
+          console.log("Автовоспроизведение заблокировано браузером:", error);
+        });
+      }, 100);
+    }
+  };
+
+  // Попытка воспроизвести видео при монтировании компонента
+  useEffect(() => {
+    if (videoRef.current) {
+      // Попытка начать загрузку видео
+      videoRef.current.load();
+    }
+  }, []);
+
   return (
     <section className="py-20 bg-luxury-beige text-luxury-dark">
       <div className="max-w-7xl mx-auto px-8">
@@ -10,7 +41,8 @@ const ProductShowcase = () => {
             ЧУВСТВОВАТЬ СЕБЯ ЧАСТЬЮ БОГАТОЙ КУЛЬТУРЫ
           </h2>
           <p className="text-lg text-luxury-dark/70 max-w-3xl mx-auto">
-            Окунитесь в мир изысканных интерьеров, где каждая деталь создает атмосферу роскоши и комфорта
+            Окружать себя и близких красотой искусства
+            Передавать наследие следующим поколениям
           </p>
         </div>
         
@@ -19,11 +51,45 @@ const ProductShowcase = () => {
             GUZEMA
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 relative z-20">
             {/* Left side - Main product */}
             <div className="space-y-6">
               <Card className="bg-gradient-to-br from-blue-100 to-blue-200 p-8 border-none">
                 <div className="aspect-[4/5] bg-gradient-to-br from-blue-300/50 to-blue-600/50 rounded-lg relative overflow-hidden">
+                  {videoLoading && !videoError && (
+                    // Прелоадер во время загрузки видео
+                    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-300/50 to-blue-600/50 z-10">
+                      <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-white"></div>
+                    </div>
+                  )}
+                  
+                  {videoError ? (
+                    // Fallback контент, если видео не загрузилось
+                    <div className="w-full h-full flex items-center justify-center bg-gradient-to-br from-blue-300/50 to-blue-600/50">
+                      <div className="text-center text-white">
+                        <p className="text-lg font-medium mb-2">Видео недоступно</p>
+                        <p className="text-sm opacity-80">Новая коллекция</p>
+                      </div>
+                    </div>
+                  ) : (
+                    // Видео элемент
+                    <>
+                      <video 
+                        ref={videoRef}
+                        autoPlay 
+                        muted 
+                        loop 
+                        playsInline
+                        className="w-full h-full object-cover"
+                        onError={handleVideoError}
+                        onLoadedData={handleVideoLoad}
+                        onLoadStart={() => setVideoLoading(true)}
+                      >
+                        <source src="/videos/main-product-video.mp4" type="video/mp4" />
+                        Ваш браузер не поддерживает видео.
+                      </video>
+                    </>
+                  )}
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent to-blue-900/20"></div>
                   <div className="absolute bottom-4 left-4 right-4">
                     <Badge variant="secondary" className="bg-white/90 text-luxury-dark">
@@ -32,26 +98,7 @@ const ProductShowcase = () => {
                   </div>
                 </div>
               </Card>
-            </div>
-            
-            {/* Right side - Text content */}
-            <div className="flex flex-col justify-center space-y-8">
-              <div className="text-6xl lg:text-7xl font-bold text-luxury-dark/20">
-                НАИВ
-              </div>
-              
-              <div className="space-y-6">
-                <p className="text-xl leading-relaxed">
-                  Современные решения для создания уникальных интерьеров, 
-                  где традиции встречаются с инновациями.
-                </p>
-                
-                <p className="text-lg text-luxury-dark/70">
-                  Каждый элемент нашей коллекции продуман до мелочей, 
-                  чтобы создать гармоничное пространство для жизни.
-                </p>
-              </div>
-            </div>
+            </div> 
           </div>
         </div>
       </div>

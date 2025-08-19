@@ -1,4 +1,5 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState, useEffect } from "react";
 
 const reviews = [
   {
@@ -51,6 +52,73 @@ const PhoneMock = ({ image, frameBg }: { image: string; frameBg: string }) => {
 };
 
 const ReviewsSection = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [direction, setDirection] = useState<"left" | "right">("right");
+
+  
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext();
+    }, 10000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
+  const handlePrev = () => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setDirection("left");
+    
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) => 
+        prevIndex === 0 ? reviews.length - 1 : prevIndex - 1
+      );
+      setIsAnimating(false);
+    }, 300);
+  };
+
+  const handleNext = () => {
+    if (isAnimating) return;
+    
+    setIsAnimating(true);
+    setDirection("right");
+    
+    setTimeout(() => {
+      setCurrentIndex((prevIndex) => 
+        prevIndex === reviews.length - 1 ? 0 : prevIndex + 1
+      );
+      setIsAnimating(false);
+    }, 300);
+  };
+
+  // Получаем видимые отзывы для текущего слайда
+  const getVisibleReviews = () => {
+    const visibleReviews = [];
+    
+    
+    if (window.innerWidth < 640) {
+      visibleReviews.push(reviews[currentIndex]);
+    } 
+   
+    else if (window.innerWidth < 1024) {
+      visibleReviews.push(reviews[currentIndex]);
+      visibleReviews.push(reviews[(currentIndex + 1) % reviews.length]);
+    } 
+    
+    else {
+      for (let i = 0; i < 4; i++) {
+        const index = (currentIndex + i) % reviews.length;
+        visibleReviews.push(reviews[index]);
+      }
+    }
+    
+    return visibleReviews;
+  };
+
+  const visibleReviews = getVisibleReviews();
+
   return (
     <section className="py-20" style={{ backgroundColor: "hsl(var(--luxury-brown))" }}>
       <div className="max-w-7xl mx-auto px-8">
@@ -62,30 +130,63 @@ const ReviewsSection = () => {
           {/* left arrow */}
           <button
             aria-label="prev"
+            onClick={handlePrev}
             className="hidden md:flex items-center justify-center absolute -left-10 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/20 text-white hover:bg-black/30 transition"
           >
             <ChevronLeft className="h-5 w-5" />
           </button>
 
-          {/* grid of phones */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 justify-items-center">
-            {reviews.map((r) => (
-              <div key={r.caption} className="flex flex-col items-center">
-                <PhoneMock image={r.image} frameBg={r.frameBg} />
-                <p className="mt-4 text-center text-sm text-luxury-beige/80 max-w-[220px]">
-                  {r.caption}
-                </p>
-              </div>
-            ))}
+          {/* grid of phones with animation */}
+          <div className="relative overflow-hidden">
+            <div 
+              className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 justify-items-center transition-transform duration-300 ease-in-out ${
+                isAnimating ? 
+                  (direction === "right" ? "transform -translate-x-full" : "transform translate-x-full") : 
+                  "transform translate-x-0"
+              }`}
+            >
+              {visibleReviews.map((r, index) => (
+                <div key={`${r.caption}-${index}`} className="flex flex-col items-center">
+                  <PhoneMock image={r.image} frameBg={r.frameBg} />
+                  <p className="mt-4 text-center text-sm text-luxury-beige/80 max-w-[220px]">
+                    {r.caption}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* right arrow */}
           <button
             aria-label="next"
+            onClick={handleNext}
             className="hidden md:flex items-center justify-center absolute -right-10 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/20 text-white hover:bg-black/30 transition"
           >
             <ChevronRight className="h-5 w-5" />
           </button>
+
+          {/* dots indicator for mobile */}
+          <div className="flex justify-center mt-8 space-x-2 md:hidden">
+            {reviews.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => {
+                  if (isAnimating) return;
+                  setIsAnimating(true);
+                  setDirection(index > currentIndex ? "right" : "left");
+                  
+                  setTimeout(() => {
+                    setCurrentIndex(index);
+                    setIsAnimating(false);
+                  }, 300);
+                }}
+                className={`w-2 h-2 rounded-full ${
+                  index === currentIndex ? "bg-luxury-gold" : "bg-luxury-beige/50"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </section>

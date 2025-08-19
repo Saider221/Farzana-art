@@ -58,48 +58,12 @@ const DeliverySection = () => {
         {/* Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold mb-2" style={{ color: 'hsl(var(--delivery-text))' }}>
-            ДОСТАВКА И ОПЛАТА
+            ОПЛАТА
           </h2>
         </div>
 
-        {/* Delivery and Payment Cards */}
-        <div className="grid md:grid-cols-2 gap-12 mb-20">
-          {/* Delivery Card */}
-          <div className="text-center">
-            <div className="flex justify-center" style={{ color: 'hsl(var(--delivery-accent))' }}>
-              <DeliveryIcon />
-            </div>
-            <h3 className="text-xl font-semibold mb-4 px-4 py-2 border rounded-full inline-block" 
-                style={{ 
-                  color: 'hsl(var(--delivery-text))', 
-                  borderColor: 'hsl(var(--delivery-accent))' 
-                }}>
-              ДОСТАВКА
-            </h3>
-            <div className="space-y-4 text-left max-w-md mx-auto" style={{ color: 'hsl(var(--delivery-text))' }}>
-              <p className="text-sm leading-relaxed">
-                ДОСТАВКА ОСУЩЕСТВЛЯЕТСЯ В ЛЮБУЮ ТОЧКУ МИРА. 
-                УПАКОВКА ВХОДИТ В СТОИМОСТЬ
-              </p>
-              <p className="text-xs leading-relaxed">
-                ✓ Доставляем картины по всему миру за 3-7 дней
-              </p>
-              <p className="text-xs leading-relaxed">
-                ✓ Надежная защитная упаковка предотвращает повреждение картин
-              </p>
-              <p className="text-sm font-medium mt-6">
-                КРОМЕ КАРТИН ИЗ НАЛИЧИЯ, ВЫ ТАКЖЕ МОЖЕТЕ ЗАКАЗАТЬ КАРТИНУ 
-                ПОД ЗАКАЗ В РАЗМЕРЕ И ПОД ВАШ ИНТЕРЬЕР
-              </p>
-              <p className="text-xs leading-relaxed">
-                ✓ У нас в наличии скорее ограниченное количество готовых работ - доставляем 
-                в тот же день после оплаты
-              </p>
-              <div className="mt-6 inline-block px-4 py-2 bg-white bg-opacity-20 rounded-full">
-                <span className="text-xs">КАРТИНЫ ДЛЯ ДУШИ</span>
-              </div>
-            </div>
-          </div>
+        
+
 
           {/* Payment Card */}
           <div className="text-center">
@@ -139,27 +103,9 @@ const DeliverySection = () => {
           </div>
         </div>
 
-        {/* Ornamental Section */}
-        <div className="text-center">
-          <div className="flex justify-center mb-8" style={{ color: 'hsl(var(--delivery-accent))' }}>
-            <OrnamentsTop />
-          </div>
-          
-          <h3 className="text-2xl font-bold mb-4" style={{ color: 'hsl(var(--delivery-text))' }}>
-            ВПИШЕТСЯ ЛИ КАРТИНА<br />
-            В МОЙ ИНТЕРЬЕР?
-          </h3>
-          
-          <p className="text-sm max-w-md mx-auto mb-8" style={{ color: 'hsl(var(--delivery-text))' }}>
-            Пришлите фотографии помещения для<br />
-            визуализации в интерьере
-          </p>
-          
-          <div className="flex justify-center" style={{ color: 'hsl(var(--delivery-accent))' }}>
-            <OrnamentsBottom />
-          </div>
-        </div>
-      </div>
+        
+      
+      
     </section>
   );
 };

@@ -47,6 +47,7 @@ const AboutSection = () => {
           {/* Profile Image */}
           <div className="relative flex justify-center">
             <div className="absolute top-0 right-0" style={{ color: 'hsl(var(--about-accent))' }}>
+              
               <AboutOrnament />
             </div>
             <div 
@@ -54,8 +55,8 @@ const AboutSection = () => {
               style={{ borderColor: 'hsl(var(--about-accent))' }}
             >
               <img 
-                src="/lovable-uploads/5cc0232e-5e1f-4e3f-826d-18652157d52c.png"
-                alt="Гузель Хайбуллова"
+                src="/public/foto1.jpg"
+                alt="Фарзана"
                 className="w-full h-full object-cover"
               />
             </div>
@@ -81,14 +82,15 @@ const AboutSection = () => {
 
             <div className="space-y-6" style={{ color: 'hsl(var(--about-text))' }}>
               <p className="leading-relaxed">
-                Я <span style={{ color: 'hsl(var(--about-accent))' }} className="font-semibold">Гузель Хайбуллова</span> — 
-                <span style={{ color: 'hsl(var(--about-accent))' }} className="font-semibold"> современный российский<br />
-                художник</span>, родилась в Самаре в<br />
-                семье татар. Работаю в технике<br />
-                авторской живописи и арабской<br />
-                каллиграфии. Как тюркский<br />
-                художник, нахожу вдохновение в<br />
-                любви народа к своей культуре.
+               <span style={{ color: 'hsl(var(--about-accent))' }} className="font-semibold">Фарзана современный арабский художник</span> — 
+                <span style={{ color: 'hsl(var(--about-accent))' }} className="font-semibold">Я работаю в технике авторской живописи и скульптурной живописи, <br />
+                </span>Соединяя текстуру, свет и внутренние ощущения в единое полотно.<br />
+                Моё вдохновение — это любовь.<br />
+                Это пески пустыни и дуновение ветра в шёлковых шатрах.<br />
+                Это культура народов мира,в которой я слышу голос предков и чувствую пульс настоящего.
+                Каждая моя работа — это история.<br />
+                Иногда — шёпот, иногда — крик. Но всегда — честный диалог с тем, кто смотрит.<br />
+                
               </p>
 
               <p className="leading-relaxed">
