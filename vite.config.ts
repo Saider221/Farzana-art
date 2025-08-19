@@ -5,6 +5,7 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  base: '/', // Базовый путь для корректной работы на Vercel
   server: {
     host: "::",
     port: 8080,
@@ -19,4 +20,14 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // Добавляем настройки для корректной работы на Vercel
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks: undefined,
+      },
+    },
+  },
+  // Настройки для статических файлов
+  publicDir: "public",
 }));
