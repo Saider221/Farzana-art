@@ -91,8 +91,9 @@ const ProductShowcase = () => {
                     </>
                   )}
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent to-blue-900/20"></div>
-                  <div className="absolute bottom-4 left-4 right-4">
+                  <div className="absolute bottom-4 left-4 right-8">
                     <Badge variant="secondary" className="bg-white/90 text-luxury-dark">
+                    
                       Новая коллекция
                     </Badge>
                   </div>

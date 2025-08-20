@@ -46,7 +46,7 @@ const FooterContacts: React.FC = () => {
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
             <div className="text-center md:text-left">
-              <div className="text-2xl font-bold mb-4">GUZEL-KHAI.RU</div>
+              <div className="text-2xl font-bold mb-4">Farzana-art</div>
               <div className="space-y-2">
                 <div className="flex items-center justify-center md:justify-start gap-2">
                   <Phone className="h-4 w-4" />
@@ -71,8 +71,8 @@ const FooterContacts: React.FC = () => {
               </nav>
               
               <div className="text-sm mt-4">
-                <p className="mb-1">ИНН 165103372300004039</p>
-                <p>Design by avolkov.guzel</p>
+                <p className="mb-1"></p>
+                <p></p>
               </div>
             </div>
             

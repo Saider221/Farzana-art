@@ -8,7 +8,7 @@ const StyleGallery = () => {
       title: "SCANDI STYLE",
       subtitle: "Интерьерная фотосъемка",
       description: "Минималистичный скандинавский стиль с акцентом на функциональность и уют",
-      image: "bg-gradient-to-br from-orange-300 via-red-300 to-pink-300"
+      image: "/public/cartina1."
     },
     {
       title: "TRADITIONAL STYLE", 
@@ -31,9 +31,6 @@ const StyleGallery = () => {
           <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
             Галерея стилей
           </h2>
-          <p className="text-white/80 text-lg">
-            Откройте для себя разнообразие дизайнерских решений
-          </p>
         </div>
         
         <div className="relative flex items-center">

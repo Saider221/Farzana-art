@@ -28,6 +28,7 @@ const Header = () => {
           <a href="#" className="text-foreground hover:text-luxury-gold transition-colors">
             Контакты
           </a>
+          
         </div>
         
         <div className="flex items-center space-x-4">

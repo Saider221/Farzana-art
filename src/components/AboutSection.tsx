@@ -13,34 +13,7 @@ const AboutOrnament = () => (
 const AboutSection = () => {
   return (
     <section className="py-20 px-6 relative" style={{ backgroundColor: 'hsl(var(--about-bg))' }}>
-      <div className="max-w-6xl mx-auto">
-        {/* Contact Section */}
-        <div className="mb-20">
-          <div className="flex flex-col md:flex-row items-start justify-between gap-12">
-            <div className="flex-1">
-              <p className="text-lg leading-relaxed mb-6" style={{ color: 'hsl(var(--about-text))' }}>
-                Пришлите мне фотографии вашего<br />
-                интерьера и понравившейся картины.<br />
-                Я сделаю/составлю картину для вашего<br />
-                интерьера, и вы легко сможете<br />
-                сделать заказ.
-              </p>
-            </div>
-            <div className="flex-shrink-0">
-              <Button 
-                variant="outline"
-                className="px-8 py-3 rounded-full border-2 hover:scale-105 transition-all duration-200"
-                style={{ 
-                  borderColor: 'hsl(var(--about-text))',
-                  color: 'hsl(var(--about-text))',
-                  backgroundColor: 'transparent'
-                }}
-              >
-                связаться →
-              </Button>
-            </div>
-          </div>
-        </div>
+      
 
         {/* About Me Section */}
         <div className="grid md:grid-cols-2 gap-16 items-start mb-20">
@@ -75,6 +48,7 @@ const AboutSection = () => {
                     <path d="M20 5C25 5 30 10 30 15C30 20 25 25 20 25C15 25 10 20 10 15C10 10 15 5 20 5Z" fill="currentColor" opacity="0.4"/>
                     <path d="M10 15C15 15 20 20 20 25C20 30 15 35 10 35C5 35 0 30 0 25C0 20 5 15 10 15Z" fill="currentColor" opacity="0.3"/>
                     <path d="M30 15C35 15 40 20 40 25C40 30 35 35 30 35C25 35 20 30 20 25C20 20 25 15 30 15Z" fill="currentColor" opacity="0.3"/>
+                    
                   </svg>
                 </div>
               </h2>
@@ -113,7 +87,7 @@ const AboutSection = () => {
 
         
         
-      </div>
+      
     </section>
   );
 };

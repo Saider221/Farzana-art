@@ -10,6 +10,7 @@ interface PaintingCardProps {
   price: string;
   id: number;
   description?: string;
+  additionalImages?: string[];
 }
 
 // Компонент модального окна с деталями картины
@@ -18,6 +19,11 @@ const PaintingDetailsModal: React.FC<{
   onClose: () => void; 
   onBuy: () => void 
 }> = ({ painting, onClose, onBuy }) => {
+  const [selectedImage, setSelectedImage] = useState(painting.image);
+  
+  // Собираем все изображения (основное + дополнительные)
+  const allImages = [painting.image, ...(painting.additionalImages || [])];
+  
   return (
     <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-2 sm:p-4 animate-fadeIn">
       <div className="bg-white rounded-lg w-full max-w-4xl max-h-[95vh] overflow-y-auto animate-slideUp">
@@ -31,11 +37,33 @@ const PaintingDetailsModal: React.FC<{
           <div className="grid grid-cols-1 gap-6">
             <div className="aspect-[3/4] overflow-hidden rounded-lg">
               <img 
-                src={painting.image} 
+                src={selectedImage} 
                 alt={painting.title}
                 className="w-full h-full object-cover"
               />
             </div>
+            
+            {/* Дополнительные изображения */}
+            {allImages.length > 1 && (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
+                {allImages.map((img, index) => (
+                  <div 
+                    key={index}
+                    className={`aspect-square overflow-hidden rounded cursor-pointer border-2 ${
+                      selectedImage === img ? 'border-luxury-gold' : 'border-transparent'
+                    }`}
+                    onClick={() => setSelectedImage(img)}
+                  >
+                    <img 
+                      src={img} 
+                      alt={`${painting.title} ${index + 1}`}
+                      className="w-full h-full object-cover hover:opacity-80 transition-opacity"
+                    />
+                  </div>
+                ))}
+              </div>
+            )}
+            
             <div className="space-y-4">
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{painting.title}</h2>
@@ -197,15 +225,24 @@ const GallerySection: React.FC = () => {
   const yaktuSeries = [
     {
       id: 1,
-      image: '/placeholder.svg',
+      image: '/public/cartina1.jpg',
+      additionalImages: [
+        '/public/photo_2025-08-15_14-10-14.jpg',
+        '/public/photo_2025-08-15_14-10-19.jpg',
+        '/public/photo_2025-08-15_14-10-30.jpg'
+      ],
       title: "Подростки на поздвоке",
       dimensions: "100 × 70 × 3см | холст",
-      price: "5 660 ₽",
+      price: "45 000₽",
       description: "Авторская картина «Подростки на поздвоке» выполнена в технике масляной живописи. Размер 100 × 70 × 3см. Картина передает нежность и красоту юного возраста, когда мир еще полон возможностей и открытий."
     },
     {
       id: 2,
-      image: '/placeholder.svg',
+      image: '/public/',
+      additionalImages: [
+        '/public/photo_2025-08-15_14-11-42.jpg',
+        '/public/photo_2025-08-15_14-11-53.jpg'
+      ],
       title: "Пейж внутреннего",
       dimensions: "120 × 90 × 3см | холст",
       price: "68 000 ₽",
@@ -214,6 +251,10 @@ const GallerySection: React.FC = () => {
     {
       id: 3,
       image: '/placeholder.svg',
+      additionalImages: [
+        '/public/photo_2025-08-15_14-11-58.jpg',
+        '/public/photo_2025-08-15_14-12-02.jpg'
+      ],
       title: "Цветение души",
       dimensions: "110 × 80 × 3см | холст",
       price: "75 000 ₽",
@@ -222,6 +263,10 @@ const GallerySection: React.FC = () => {
     {
       id: 4,
       image: '/placeholder.svg',
+      additionalImages: [
+        '/public/photo_2025-08-15_14-12-06.jpg',
+        '/public/photo_2025-08-15_14-12-09.jpg'
+      ],
       title: "Весна",
       dimensions: "100 × 70 × 3см | холст",
       price: "56 000 ₽",
@@ -233,6 +278,10 @@ const GallerySection: React.FC = () => {
     {
       id: 5,
       image: '/placeholder.svg',
+      additionalImages: [
+        '/public/photo_2025-08-15_14-11-42.jpg',
+        '/public/photo_2025-08-15_14-11-53.jpg'
+      ],
       title: "Художник",
       dimensions: "120 × 90 × 3см | холст",
       price: "75 000 ₽",
@@ -244,6 +293,10 @@ const GallerySection: React.FC = () => {
     {
       id: 6,
       image: '/placeholder.svg',
+      additionalImages: [
+        '/public/photo_2025-08-15_14-10-14.jpg',
+        '/public/photo_2025-08-15_14-10-19.jpg'
+      ],
       title: "Акася - Радикальное Рождение",
       dimensions: "100 × 70 × 3см | холст",
       price: "40 000 ₽",
@@ -252,6 +305,10 @@ const GallerySection: React.FC = () => {
     {
       id: 7,
       image: '/placeholder.svg',
+      additionalImages: [
+        '/public/photo_2025-08-15_14-10-30.jpg',
+        '/public/photo_2025-08-15_14-11-42.jpg'
+      ],
       title: "Толстенький",
       dimensions: "100 × 70 × 3см | холст",
       price: "40 000 ₽",
@@ -260,6 +317,10 @@ const GallerySection: React.FC = () => {
     {
       id: 8,
       image: '/placeholder.svg',
+      additionalImages: [
+        '/public/photo_2025-08-15_14-11-53.jpg',
+        '/public/photo_2025-08-15_14-11-58.jpg'
+      ],
       title: "Самомет",
       dimensions: "100 × 70 × 3см | холст",
       price: "40 000 ₽",
@@ -268,6 +329,10 @@ const GallerySection: React.FC = () => {
     {
       id: 9,
       image: '/placeholder.svg',
+      additionalImages: [
+        '/public/photo_2025-08-15_14-12-02.jpg',
+        '/public/photo_2025-08-15_14-12-06.jpg'
+      ],
       title: "Палынхору",
       dimensions: "100 × 70 × 3см | холст",
       price: "40 000 ₽",
@@ -279,6 +344,10 @@ const GallerySection: React.FC = () => {
     {
       id: 10,
       image: '/placeholder.svg',
+      additionalImages: [
+        '/public/photo_2025-08-15_14-12-09.jpg',
+        '/public/photo_2025-08-15_14-10-14.jpg'
+      ],
       title: "Биофизик",
       dimensions: "80 × 60 × 3см | холст",
       price: "25 000 ₽",
@@ -286,7 +355,11 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 11,
-      image: '/placeholder.svg',
+      image: '/',
+      additionalImages: [
+        '/public/photo_2025-08-15_14-10-19.jpg',
+        '/public/photo_2025-08-15_14-10-30.jpg'
+      ],
       title: "Задание",
       dimensions: "80 × 60 × 3см | холст",
       price: "25 000 ₽",
@@ -295,6 +368,10 @@ const GallerySection: React.FC = () => {
     {
       id: 12,
       image: '/placeholder.svg',
+      additionalImages: [
+        '/public/photo_2025-08-15_14-11-42.jpg',
+        '/public/photo_2025-08-15_14-11-53.jpg'
+      ],
       title: "Авангард пороки",
       dimensions: "80 × 60 × 3см | холст",
       price: "25 000 ₽",
@@ -303,6 +380,10 @@ const GallerySection: React.FC = () => {
     {
       id: 13,
       image: '/placeholder.svg',
+      additionalImages: [
+        '/public/photo_2025-08-15_14-11-58.jpg',
+        '/public/photo_2025-08-15_14-12-02.jpg'
+      ],
       title: "Новый парень",
       dimensions: "80 × 60 × 3см | холст",
       price: "25 000 ₽",

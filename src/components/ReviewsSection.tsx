@@ -1,3 +1,4 @@
+import { setFips } from "crypto";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 
@@ -174,6 +175,7 @@ const ReviewsSection = () => {
                   if (isAnimating) return;
                   setIsAnimating(true);
                   setDirection(index > currentIndex ? "right" : "left");
+                  
                   
                   setTimeout(() => {
                     setCurrentIndex(index);

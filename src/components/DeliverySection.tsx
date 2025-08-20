@@ -79,26 +79,19 @@ const DeliverySection = () => {
             </h3>
             <div className="space-y-4 text-left max-w-md mx-auto" style={{ color: 'hsl(var(--delivery-text))' }}>
               <p className="text-sm leading-relaxed">
-                ОПЛАТИТЬ МОЖНО ОНЛАЙН С ЛЮБОЙ РОССИЙСКОЙ КАРТЫ, 
-                ЗАРУБЕЖНЫМИ ПЛАТЕЖИ ЧЕРЕЗ КРИПТОВАЛЮТЫ/USDT/PAYPAL
+              ОПЛАТИТЬ МОЖНО ОНЛАЙН С ЛЮБОЙ РОССИЙСКОЙ КАРТЫ. 
+                
               </p>
               <p className="text-xs leading-relaxed">
-                ✓ Банковские карты России
+              КАРТИНЫ
+              НА ЗАКАЗ
               </p>
               <p className="text-xs leading-relaxed">
-                ✓ PayPal для покупателей из других стран
+              Кроме картин из наличия, вы также можете заказать картину нужного вам размера и под ваш интерьер
               </p>
               <p className="text-xs leading-relaxed">
-                ✓ Крипто платежи: Bitcoin/Ethereum/USDT/другие популярные криптовалюты Ethereum/Bitcoin на наш криптокошелек
+              Напишите мне на почту kadyrova.farzana.98@mail.ru или в мессенджер  
               </p>
-              <div className="mt-6 p-3 bg-white bg-opacity-10 rounded-lg">
-                <p className="text-xs">
-                  ПОКУПАЕТЕ НЕ НА ПУСТУУ МЕСТЕ, НА НАШЕМ САЙТЕ НОД В ИНСТАГРАМЕ
-                  <span className="inline-flex items-center ml-2">
-                    <span className="text-sm">📱 💬</span>
-                  </span>
-                </p>
-              </div>
             </div>
           </div>
         </div>

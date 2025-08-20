@@ -1,4 +1,5 @@
 import { createHash } from 'crypto';
+import { isRestTypeNode } from 'typescript';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
