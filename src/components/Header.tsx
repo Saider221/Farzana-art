@@ -1,4 +1,4 @@
-import { Menu, Search, User } from "lucide-react";
+import { Menu, Search, User, MessageCircle, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 const Header = () => {
@@ -9,7 +9,7 @@ const Header = () => {
           <Button variant="ghost" size="icon" className="text-luxury-gold">
             <Menu className="h-6 w-6" />
           </Button>
-          <div className="text-2xl font-bold text-luxury-gold">GUZEMA</div>
+          <div className="text-2xl font-bold text-luxury-gold">FARZANA</div>
         </div>
         
         <div className="hidden md:flex items-center space-x-8">
@@ -32,6 +32,17 @@ const Header = () => {
         </div>
         
         <div className="flex items-center space-x-4">
+          {/* Иконки WhatsApp и Telegram */}
+          <a href="https://wa.me/ваш_номер" target="_blank" rel="noopener noreferrer">
+            <Button variant="ghost" size="icon" className="text-luxury-gold hover:text-luxury-gold/80">
+              <MessageCircle className="h-5 w-5" />
+            </Button>
+          </a>
+          <a href="https://t.me/ваш_ник" target="_blank" rel="noopener noreferrer">
+            <Button variant="ghost" size="icon" className="text-luxury-gold hover:text-luxury-gold/80">
+              <Phone className="h-5 w-5" />
+            </Button>
+          </a>
           <Button variant="ghost" size="icon" className="text-luxury-gold">
             <Search className="h-5 w-5" />
           </Button>

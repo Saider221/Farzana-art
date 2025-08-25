@@ -227,9 +227,9 @@ const GallerySection: React.FC = () => {
       id: 1,
       image: '/public/cartina1.jpg',
       additionalImages: [
-        '/public/photo_2025-08-15_14-10-14.jpg',
-        '/public/photo_2025-08-15_14-10-19.jpg',
-        '/public/photo_2025-08-15_14-10-30.jpg'
+        '/public/cartina1iz1.png',
+        '/public/cartina1iz2.png',
+        '/public/cartina1iz3.png'
       ],
       title: "Подростки на поздвоке",
       dimensions: "100 × 70 × 3см | холст",
@@ -240,8 +240,8 @@ const GallerySection: React.FC = () => {
       id: 2,
       image: '/public/',
       additionalImages: [
-        '/public/photo_2025-08-15_14-11-42.jpg',
-        '/public/photo_2025-08-15_14-11-53.jpg'
+        '/public/cartina2iz1.png',
+        '/public/cartina2iz2.png'
       ],
       title: "Пейж внутреннего",
       dimensions: "120 × 90 × 3см | холст",
@@ -250,10 +250,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 3,
-      image: '/placeholder.svg',
+      image: '/public/cartina3iz1.png',
       additionalImages: [
-        '/public/photo_2025-08-15_14-11-58.jpg',
-        '/public/photo_2025-08-15_14-12-02.jpg'
+        '/public/cartina3iz2.png',
+        '/public/cartina3iz3.png'
       ],
       title: "Цветение души",
       dimensions: "110 × 80 × 3см | холст",
@@ -262,10 +262,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 4,
-      image: '/placeholder.svg',
+      image: '/public/cartina4iz1.png',
       additionalImages: [
-        '/public/photo_2025-08-15_14-12-06.jpg',
-        '/public/photo_2025-08-15_14-12-09.jpg'
+        '/public/cartina4iz2.png',
+        '/public/cartina4iz3.png'
       ],
       title: "Весна",
       dimensions: "100 × 70 × 3см | холст",
@@ -404,22 +404,22 @@ const GallerySection: React.FC = () => {
 
         {/* Painting Series */}
         <PaintingSeries 
-          title="Серия картин «Яркту»"
+          title="Серия картин"
           paintings={yaktuSeries}
         />
 
         <PaintingSeries 
-          title="Серия картин «Lady Tatarstan»"
+          title="Серия картин  »"
           paintings={ladyTatarstanSeries}
         />
 
         <PaintingSeries 
-          title="Серия картин «Челочек»"
+          title="Серия картин"
           paintings={chelochekSeries}
         />
 
         <PaintingSeries 
-          title="Пустынная коллекция"
+          title="Серия картин"
           paintings={desertCollection}
         />
 

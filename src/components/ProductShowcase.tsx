@@ -16,46 +16,35 @@ const ProductShowcase = () => {
     setVideoLoading(false);
     
     if (videoRef.current) {
-      
-      setTimeout(() => {
-        videoRef.current?.play().catch(error => {
-          console.log("Автовоспроизведение заблокировано браузером:", error);
-        });
-      }, 100);
+      videoRef.current.play().catch(error => {
+        console.log("Автовоспроизведение заблокировано браузером:", error);
+      });
     }
   };
 
-  // Попытка воспроизвести видео при монтировании компонента
-  useEffect(() => {
-    if (videoRef.current) {
-      // Попытка начать загрузку видео
-      videoRef.current.load();
-    }
-  }, []);
-
   return (
     <section className="py-20 bg-luxury-beige text-luxury-dark">
-      <div className="max-w-7xl mx-auto px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
             ЧУВСТВОВАТЬ СЕБЯ ЧАСТЬЮ БОГАТОЙ КУЛЬТУРЫ
           </h2>
-          <p className="text-lg text-luxury-dark/70 max-w-3xl mx-auto">
+          <p className="text-lg text-luxury-dark/70 max-w-3xl mx-auto px-4">
             Окружать себя и близких красотой искусства
             Передавать наследие следующим поколениям
           </p>
         </div>
         
-        <div className="relative">
-          <div className="text-8xl lg:text-9xl font-bold text-luxury-dark/10 absolute top-0 left-0 z-0">
+        <div className="relative flex justify-center">
+          <div className="text-6xl sm:text-7xl lg:text-9xl font-bold text-luxury-dark/10 absolute top-0 left-0 z-0">
             GUZEMA
           </div>
           
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 relative z-20">
-            {/* Left side - Main product */}
-            <div className="space-y-6">
-              <Card className="bg-gradient-to-br from-blue-100 to-blue-200 p-8 border-none">
-                <div className="aspect-[4/5] bg-gradient-to-br from-blue-300/50 to-blue-600/50 rounded-lg relative overflow-hidden">
+          <div className="w-full max-w-4xl relative z-20">
+            {/* Centered video container */}
+            <div className="flex justify-center">
+              <div className="w-full max-w-2xl">
+                <div className="aspect-[4/5] sm:aspect-video relative overflow-hidden rounded-lg">
                   {videoLoading && !videoError && (
                     // Прелоадер во время загрузки видео
                     <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-blue-300/50 to-blue-600/50 z-10">
@@ -93,13 +82,12 @@ const ProductShowcase = () => {
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent to-blue-900/20"></div>
                   <div className="absolute bottom-4 left-4 right-8">
                     <Badge variant="secondary" className="bg-white/90 text-luxury-dark">
-                    
                       Новая коллекция
                     </Badge>
                   </div>
                 </div>
-              </Card>
-            </div> 
+              </div>
+            </div>
           </div>
         </div>
       </div>
