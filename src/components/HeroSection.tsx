@@ -24,7 +24,7 @@ const HeroSection = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 flex items-center min-h-screen">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-center w-full">
-          {/* Left Content */}}
+          {/* Left Content */}
           <div className="space-y-8">
             <div className="space-y-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
