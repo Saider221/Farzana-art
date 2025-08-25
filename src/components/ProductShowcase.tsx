@@ -37,7 +37,7 @@ const ProductShowcase = () => {
         
         <div className="relative flex justify-center">
           <div className="text-6xl sm:text-7xl lg:text-9xl font-bold text-luxury-dark/10 absolute top-0 left-0 z-0">
-            GUZEMA
+            
           </div>
           
           <div className="w-full max-w-4xl relative z-20">

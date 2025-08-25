@@ -63,9 +63,9 @@ const StyleGallery = () => {
 
   return (
     <section className="py-20 bg-luxury-green relative">
-      <div className="max-w-7xl mx-auto px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-white mb-4">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
             Галерея стилей
           </h2>
         </div>
@@ -76,20 +76,20 @@ const StyleGallery = () => {
             variant="outline" 
             size="icon" 
             onClick={prevSlide}
-            className="absolute left-[-60px] z-10 bg-white border-white text-luxury-green hover:bg-luxury-green hover:text-white hover:border-luxury-green"
+            className="absolute left-[-40px] sm:left-[-60px] z-10 bg-white border-white text-luxury-green hover:bg-luxury-green hover:text-white hover:border-luxury-green"
           >
             <ChevronLeft className="h-5 w-5" />
           </Button>
           
           {/* Cards Container */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
             {visibleStyles.map((style, index) => (
               <div 
                 key={currentIndex + index} 
-                className="group hover:transform hover:scale-105 transition-all duration-300"
+                className="group"
               >
                 {/* Square Image Container */}
-                <div className={`h-80 ${style.image} relative overflow-hidden rounded-t-2xl`}>
+                <div className={`h-64 sm:h-80 ${style.image} relative overflow-hidden rounded-t-2xl`}>
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
                 </div>
                 
@@ -112,7 +112,7 @@ const StyleGallery = () => {
             variant="outline" 
             size="icon" 
             onClick={nextSlide}
-            className="absolute right-[-60px] z-10 bg-white border-white text-luxury-green hover:bg-luxury-green hover:text-white hover:border-luxury-green"
+            className="absolute right-[-40px] sm:right-[-60px] z-10 bg-white border-white text-luxury-green hover:bg-luxury-green hover:text-white hover:border-luxury-green"
           >
             <ChevronRight className="h-5 w-5" />
           </Button>

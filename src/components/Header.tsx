@@ -3,35 +3,34 @@ import { Button } from "@/components/ui/button";
 
 const Header = () => {
   return (
-    <header className="w-full py-6 px-8 bg-background/80 backdrop-blur-sm sticky top-0 z-50">
+    <header className="w-full py-4 sm:py-6 px-4 sm:px-6 lg:px-8 bg-background/80 backdrop-blur-sm sticky top-0 z-50">
       <nav className="max-w-7xl mx-auto flex items-center justify-between">
-        <div className="flex items-center space-x-8">
+        <div className="flex items-center space-x-4 sm:space-x-8">
           <Button variant="ghost" size="icon" className="text-luxury-gold">
             <Menu className="h-6 w-6" />
           </Button>
-          <div className="text-2xl font-bold text-luxury-gold">FARZANA</div>
+          <div className="text-xl sm:text-2xl font-bold text-luxury-gold">FARZANA</div>
         </div>
         
-        <div className="hidden md:flex items-center space-x-8">
-          <a href="#" className="text-foreground hover:text-luxury-gold transition-colors">
+        <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
+          <a href="#" className="text-foreground hover:text-luxury-gold transition-colors text-sm lg:text-base">
             Главная
           </a>
-          <a href="#" className="text-foreground hover:text-luxury-gold transition-colors">
+          <a href="#" className="text-foreground hover:text-luxury-gold transition-colors text-sm lg:text-base">
             Обо мне
           </a>
-          <a href="#" className="text-foreground hover:text-luxury-gold transition-colors">
+          <a href="#" className="text-foreground hover:text-luxury-gold transition-colors text-sm lg:text-base">
             Магазин
           </a>
-          <a href="#" className="text-foreground hover:text-luxury-gold transition-colors">
+          <a href="#" className="text-foreground hover:text-luxury-gold transition-colors text-sm lg:text-base">
             Арт Терапия 
           </a>
-          <a href="#" className="text-foreground hover:text-luxury-gold transition-colors">
+          <a href="#" className="text-foreground hover:text-luxury-gold transition-colors text-sm lg:text-base">
             Контакты
           </a>
-          
         </div>
         
-        <div className="flex items-center space-x-4">
+        <div className="flex items-center space-x-2 sm:space-x-4">
           {/* Иконки WhatsApp и Telegram */}
           <a href="https://wa.me/ваш_номер" target="_blank" rel="noopener noreferrer">
             <Button variant="ghost" size="icon" className="text-luxury-gold hover:text-luxury-gold/80">
