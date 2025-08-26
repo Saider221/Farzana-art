@@ -160,7 +160,7 @@ const ArtTerapy = () => {
           <div className="space-y-6">
             <div className="text-center lg:text-left">
               <h3 className="text-2xl sm:text-3xl font-bold text-luxury-dark mb-2">
-                ВИДЕО !!!Для взрослых
+              Для взрослых
               </h3>
               <div className="w-16 h-1 bg-luxury-gold mx-auto lg:mx-0"></div>
             </div>
