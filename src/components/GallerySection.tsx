@@ -225,11 +225,11 @@ const GallerySection: React.FC = () => {
   const yaktuSeries = [
     {
       id: 1,
-      image: '/public/cartina1.jpg',
+      image: '/cartina1.jpg',
       additionalImages: [
-        '/public/cartina1iz1.png',
-        '/public/cartina1iz2.png',
-        '/public/cartina1iz3.png'
+        '/cartina10iz1.png',
+        '/cartina3iz1.png',
+        '/cartina4iz1.png'
       ],
       title: "Шепот",
       dimensions: "Картина 90×90, тестурная паста, масло, акрил, выполнена в смешанной техники (скульптурная ЖИВОПИСЬ).",
@@ -238,10 +238,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 2,
-      image: '/public/',
+      image: '/',
       additionalImages: [
-        '/public/cartina2iz1.png',
-        '/public/cartina2iz2.png'
+        '/cartina3iz2.png',
+        '/cartina3iz3.png'
       ],
       title: "Габбех",
       dimensions: "Картина 100x80, текстурная паста, золотая поталь, акрил, позолоченные бусы.",
@@ -250,10 +250,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 3,
-      image: '/public/cartina3iz1.png',
+      image: '/cartina3iz1.png',
       additionalImages: [
-        '/public/cartina3iz2.png',
-        '/public/cartina3iz3.png'
+        '/cartina3iz2.png',
+        '/cartina3iz3.png'
       ],
       title: "Мактуб",
       dimensions: "80 × 80  ",
@@ -262,10 +262,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 4,
-      image: '/public/cartina4iz1.png',
+      image: '/cartina4iz1.png',
       additionalImages: [
-        '/public/cartina4iz2.png',
-        '/public/cartina4iz3.png'
+        '/cartina4iz2.png',
+        '/cartina4iz3.png'
       ],
       title: "Юдифь и Олоферн",
       dimensions: "100 × 70 × 3см | холст",
@@ -277,10 +277,10 @@ const GallerySection: React.FC = () => {
   const ladyTatarstanSeries = [
     {
       id: 5,
-      image: '/placeholder.svg',
+      image: '/cartina3iz1.png',
       additionalImages: [
-        '/public/photo_2025-08-15_14-11-42.jpg',
-        '/public/photo_2025-08-15_14-11-53.jpg'
+        '/cartina3iz2.png',
+        '/cartina3iz3.png'
       ],
       title: "Расплавленное солнце",
       dimensions: "Размер 100x90, материалы: текстурная паста, акрил, золотая поталь, выполнена в технике состаривания.",
@@ -292,10 +292,10 @@ const GallerySection: React.FC = () => {
   const chelochekSeries = [
     {
       id: 6,
-      image: '/placeholder.svg',
+      image: '/cartina1.jpg',
       additionalImages: [
-        '/public/photo_2025-08-15_14-10-14.jpg',
-        '/public/photo_2025-08-15_14-10-19.jpg'
+        '/photo_2025-08-15_14-10-19.jpg',
+        '/photo_2025-08-15_14-10-30.jpg'
       ],
       title: "Цветок пустыни ",
       dimensions: "Картина 50x40, акрил. ",
@@ -304,10 +304,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 7,
-      image: '/placeholder.svg',
+      image: '/pocel.png',
       additionalImages: [
-        '/public/photo_2025-08-15_14-10-30.jpg',
-        '/public/photo_2025-08-15_14-11-42.jpg'
+        '/pomovka.png',
+        '/photo_2025-08-15_14-10-14.jpg'
       ],
       title: "Поцелуй",
       dimensions: "Картина 70x70. Копия картины Густава Климта.",
@@ -316,10 +316,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 8,
-      image: '/placeholder.svg',
+      image: '/cartina8iz2.png',
       additionalImages: [
-        '/public/photo_2025-08-15_14-11-53.jpg',
-        '/public/photo_2025-08-15_14-11-58.jpg'
+        '/cartina8iz2.png',
+        '/cartina8iz3.png'
       ],
       title: "Помолвка",
       dimensions: "Картина 70x50, акрил.",
@@ -328,10 +328,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 9,
-      image: '/placeholder.svg',
+      image: '/cartina9iz5.png',
       additionalImages: [
-        '/public/photo_2025-08-15_14-12-02.jpg',
-        '/public/photo_2025-08-15_14-12-06.jpg'
+        '/photo_2025-08-15_14-12-02.jpg',
+        '/photo_2025-08-15_14-12-06.jpg'
       ],
       title: "Сура Аль-Фатиха.",
       dimensions: "100 × 70 × 3см | холст",
@@ -343,10 +343,10 @@ const GallerySection: React.FC = () => {
   const desertCollection = [
     {
       id: 10,
-      image: '/placeholder.svg',
+      image: '/cartina3iz1.png',
       additionalImages: [
-        '/public/photo_2025-08-15_14-12-09.jpg',
-        '/public/photo_2025-08-15_14-10-14.jpg'
+        '/photo_2025-08-15_14-12-09.jpg',
+        '/photo_2025-08-15_14-10-14.jpg'
       ],
       title: "Посланник",
       dimensions: "Картина 50x40, выполнена в смешанной технике, акрил, текстурная паста, золотая поталь и дополнительные элементы. ",
@@ -355,10 +355,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 11,
-      image: '/',
+      image: '/photo_2025-08-15_14-10-19.jpg',
       additionalImages: [
-        '/public/photo_2025-08-15_14-10-19.jpg',
-        '/public/photo_2025-08-15_14-10-30.jpg'
+        '/photo_2025-08-15_14-10-30.jpg',
+        '/photo_2025-08-15_14-11-53.jpg'
       ],
       title: "Молитва",
       dimensions: "80 × 60 × 3см | холст",
@@ -367,10 +367,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 12,
-      image: '/placeholder.svg',
+      image: '/cartina3iz1.png',
       additionalImages: [
-        '/public/photo_2025-08-15_14-11-42.jpg',
-        '/public/photo_2025-08-15_14-11-53.jpg'
+        '/cartina3iz2.png',
+        '/cartina3iz3.png'
       ],
       title: "Сумасшедший",
       dimensions: "Картина 50x40, акрил.",
@@ -379,10 +379,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 13,
-      image: '/placeholder.svg',
+      image: '/photo_2025-08-15_14-11-58.jpg',
       additionalImages: [
-        '/public/photo_2025-08-15_14-11-58.jpg',
-        '/public/photo_2025-08-15_14-12-02.jpg'
+        '/photo_2025-08-15_14-12-02.jpg',
+        '/photo_2025-08-15_14-12-06.jpg'
       ],
       title: "Рассвет",
       dimensions: "Картина 30x30, масло, текстурная паста.",
@@ -391,10 +391,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 14,
-      image: '/placeholder.svg',
+      image: '/cartina3iz1.png',
       additionalImages: [
-        '/public/photo_2025-08-15_14-11-58.jpg',
-        '/public/photo_2025-08-15_14-12-02.jpg'
+        '/cartina3iz2.png',
+        '/cartina3iz3.png'
       ],
       title: "Гость",
       dimensions: "80 × 60 × 3см | холст",
@@ -403,10 +403,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 15,
-      image: '/placeholder.svg',
+      image: '/photo_2025-08-15_14-11-58.jpg',
       additionalImages: [
-        '/public/photo_2025-08-15_14-11-58.jpg',
-        '/public/photo_2025-08-15_14-12-02.jpg'
+        '/photo_2025-08-15_14-12-02.jpg',
+        '/photo_2025-08-15_14-12-06.jpg'
       ],
       title: "Звездная ночь",
       dimensions: "Картина 30x40, копия картины Ван Гога.",
@@ -415,10 +415,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 16,
-      image: '/placeholder.svg',
+      image: '/cartina3iz1.png',
       additionalImages: [
-        '/public/photo_2025-08-15_14-11-58.jpg',
-        '/public/photo_2025-08-15_14-12-02.jpg'
+        '/cartina3iz2.png',
+        '/cartina3iz3.png'
       ],
       title: "Три возраста женщины",
       dimensions: "Копия картины Густава Климта. Материалы: акрил, золотая поталь.",
@@ -427,10 +427,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 17,
-      image: '/placeholder.svg',
+      image: '/cartina3iz1.png',
       additionalImages: [
-        '/public/photo_2025-08-15_14-11-58.jpg',
-        '/public/photo_2025-08-15_14-12-02.jpg'
+        '/cartina3iz2.png',
+        '/cartina3iz3.png'
       ],
       title: "Пустыня",
       dimensions: "Картина 50x40, текстурная паста, золотая поталь, акрил.",
