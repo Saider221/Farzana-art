@@ -6,40 +6,40 @@ import { useState } from "react";
 const StyleGallery = () => {
   const styles = [
     {
-      title: "",
+      title: "Скандинавский стиль",
       subtitle: "Интерьерная фотосъемка",
       description: "Минималистичный скандинавский стиль с акцентом на функциональность и уют",
       image: "/cartina3iz1.png"
     },
     {
-      title: "Стиль", 
+      title: "Традиционный стиль", 
       subtitle: "Классические решения",
       description: "Элегантные традиционные интерьеры с богатой историей и изысканными деталями",
-      image: "bg-gradient-to-br from-gray-200 via-gray-300 to-gray-400"
+      image: "/cartina4iz1.png"
     },
     {
-      title: "Стиль",
+      title: "Минимализм",
       subtitle: "Современный минимализм", 
       description: "Чистые линии и открытые пространства для современной жизни",
-      image: "bg-gradient-to-br from-blue-200 via-blue-300 to-indigo-300"
+      image: "/photo_2025-08-15_14-10-14.jpg"
     },
     {
-      title: "Стиль",
+      title: "Скандинавский стиль",
       subtitle: "Интерьерная фотосъемка",
       description: "Минималистичный скандинавский стиль с акцентом на функциональность и уют",
-      image: "bg-gradient-to-br from-orange-200 via-orange-300 to-amber-400"
+      image: "/photo_2025-08-15_14-10-19.jpg"
     },
     {
-      title: "Стиль", 
+      title: "Традиционный стиль", 
       subtitle: "Классические решения",
       description: "Элегантные традиционные интерьеры с богатой историей и изысканными деталями",
-      image: "bg-gradient-to-br from-emerald-200 via-emerald-300 to-teal-400"
+      image: "/photo_2025-08-15_14-10-30.jpg"
     },
     {
-      title: "Стиль",
+      title: "Минимализм",
       subtitle: "Современный минимализм", 
       description: "Чистые линии и открытые пространства для современной жизни",
-      image: "bg-gradient-to-br from-violet-200 via-violet-300 to-purple-400"
+      image: "/photo_2025-08-15_14-11-53.jpg"
     }
   ];
 
@@ -89,7 +89,12 @@ const StyleGallery = () => {
                 className="group"
               >
                 {/* Square Image Container */}
-                <div className={`h-64 sm:h-80 ${style.image} relative overflow-hidden rounded-t-2xl`}>
+                <div className="h-64 sm:h-80 relative overflow-hidden rounded-t-2xl">
+                  <img 
+                    src={style.image} 
+                    alt={style.title}
+                    className="w-full h-full object-cover"
+                  />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
                 </div>
                 

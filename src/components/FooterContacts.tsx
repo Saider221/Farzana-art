@@ -12,18 +12,18 @@ const FooterContacts: React.FC = () => {
           <div className="flex flex-col md:flex-row items-center justify-center gap-6 mb-8">
             <div className="flex items-center gap-2 text-luxury-dark">
               <Phone className="h-5 w-5" />
-              <span className="text-lg">+7 927 209 45 55</span>
+              <span className="text-lg">+7 908 680-09-46</span>
             </div>
             <div className="flex items-center gap-2 text-luxury-dark">
               <Mail className="h-5 w-5" />
-              <span className="text-lg">guzelkhai@yandex.ru</span>
+              <span className="text-lg">kadyrova.farzana.98@mail.ru</span>
             </div>
           </div>
           
           <div className="flex justify-center gap-6 mb-8">
-            <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-luxury-dark hover:text-luxury-gold transition-colors">
+            {/* <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-luxury-dark hover:text-luxury-gold transition-colors">
               <Facebook className="h-8 w-8" />
-            </a>
+            </a> */}
             <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-luxury-dark hover:text-luxury-gold transition-colors">
               <Instagram className="h-8 w-8" />
             </a>
@@ -54,7 +54,7 @@ const FooterContacts: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-center md:justify-start gap-2">
                   <Mail className="h-4 w-4" />
-                  <span>mailto:kadyrova.farzana.98@mail.ru</span>
+                  <span>kadyrova.farzana.98@mail.ru</span>
                 </div>
               </div>
             </div>
@@ -74,10 +74,10 @@ const FooterContacts: React.FC = () => {
             </div>
             
             <div className="text-center md:text-right">
-              <a href="/privacy" className="block underline mb-2 hover:text-luxury-gold transition-colors">
+              {/* <a href="/privacy" className="block underline mb-2 hover:text-luxury-gold transition-colors">
                 Политика конфиденциальности
-              </a>
-              <p className="text-sm">© 2024 guzelkhai</p>
+              </a> */}
+              <p className="text-sm">© 2025 Farzana-art </p>
             </div>
           </div>
         </div>

@@ -76,9 +76,6 @@ const Header = () => {
               </Button>
             </a>
             <Button variant="ghost" size="icon" className="text-luxury-gold">
-              <Search className="h-5 w-5" />
-            </Button>
-            <Button variant="ghost" size="icon" className="text-luxury-gold">
               <User className="h-5 w-5" />
             </Button>
           </div>
@@ -136,9 +133,6 @@ const Header = () => {
                       <Phone className="h-5 w-5" />
                     </Button>
                   </a>
-                </div>
-                <div className="text-center text-sm text-muted-foreground">
-                  Свяжитесь с нами
                 </div>
               </div>
             </div>

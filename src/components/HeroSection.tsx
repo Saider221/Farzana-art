@@ -28,31 +28,25 @@ const HeroSection = () => {
           <div className="space-y-8">
             <div className="space-y-6">
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
-                Коллекция
+              Фарзана
                 <br />
-                <span className="text-luxury-gold">«ПУСТЫННАЯ»</span>
+                <span className="text-luxury-gold">«Современный арабский художник»</span>
               </h1>
               
               <div className="space-y-4 text-luxury-beige/80 text-base sm:text-lg">
                 <p>
-                  Каждая из наших серий является
+                Я работаю в технике авторской живописи и скульптурной живописи, соединяя текстуру, свет и внутренние ощущения в единое полотно.
                   <br />
-                  творческим произведением.
+                  Моё вдохновение — это любовь. Это пески пустыни и дуновение ветра в шёлковых шатрах. 
                 </p>
                 <p>
-                  С яркими мотивами из
+                  Это культура народов мира, в которой я слышу голос предков и чувствую пульс настоящего.
                   <br />
-                  богатой мозаичности
+                  Каждая моя работа — это история. Иногда — шёпот, иногда — крик. Но всегда — честный диалог с тем, кто смотрит.
                 </p>
               </div>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button 
-                  variant="outline" 
-                  className="border-luxury-gold text-luxury-gold hover:bg-luxury-gold hover:text-luxury-dark transition-all duration-300 px-6 sm:px-8 py-2 sm:py-3"
-                >
-                  Подробная информация →
-                </Button>
               </div>
             </div>
           </div>
