@@ -53,7 +53,7 @@ const OrnamentsBottom = () => (
 
 const DeliverySection = () => {
   return (
-    <section className="py-16 px-6" style={{ backgroundColor: 'hsl(var(--delivery-bg))' }}>
+    <section id="delivery" className="py-16 px-6" style={{ backgroundColor: 'hsl(var(--delivery-bg))' }}>
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">

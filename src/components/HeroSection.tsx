@@ -7,7 +7,7 @@ const HeroSection = () => {
   const [showPayment, setShowPayment] = useState(false);
 
   return (
-    <section className="min-h-screen bg-background relative overflow-hidden">
+    <section id="hero" className="min-h-screen bg-background relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute top-10 left-10 sm:top-20 sm:left-20 text-luxury-gold/30 hidden md:block">
         <Star className="h-6 w-6 sm:h-8 sm:w-8" />

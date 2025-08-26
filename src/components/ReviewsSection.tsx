@@ -121,7 +121,7 @@ const ReviewsSection = () => {
   const visibleReviews = getVisibleReviews();
 
   return (
-    <section className="py-20" style={{ backgroundColor: "hsl(var(--luxury-brown))" }}>
+    <section id="reviews" className="py-20" style={{ backgroundColor: "hsl(var(--luxury-brown))" }}>
       <div className="max-w-7xl mx-auto px-8">
         <h2 className="text-4xl md:text-5xl font-semibold text-luxury-beige mb-10">
           ОТЗЫВЫ

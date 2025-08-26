@@ -27,12 +27,25 @@ const Header = () => {
     }
   }, [isMobile]);
 
+  // Функция для прокрутки к секции
+  const scrollToSection = (sectionId: string) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: 'smooth' });
+      setIsMenuOpen(false);
+    }
+  };
+
   const navItems = [
-    { name: "Главная", href: "#" },
-    { name: "Обо мне", href: "#" },
-    { name: "Магазин", href: "#" },
-    { name: "Арт Терапия", href: "#" },
-    { name: "Контакты", href: "#" }
+    { name: "Главная", id: "hero" },
+    { name: "Галерея", id: "gallery" },
+    { name: "Стили", id: "styles" },
+    { name: "Отзывы", id: "reviews" },
+    { name: "Доставка", id: "delivery" },
+    { name: "Арт-терапия", id: "art-therapy" },
+    { name: "На заказ", id: "custom" },
+    { name: "Обо мне", id: "about" },
+    { name: "Контакты", id: "contacts" }
   ];
 
   return (
@@ -53,13 +66,13 @@ const Header = () => {
           
           <div className="hidden md:flex items-center space-x-6 lg:space-x-8">
             {navItems.map((item) => (
-              <a 
+              <button
                 key={item.name} 
-                href={item.href} 
-                className="text-foreground hover:text-luxury-gold transition-colors text-sm lg:text-base"
+                onClick={() => scrollToSection(item.id)}
+                className="text-foreground hover:text-luxury-gold transition-colors text-sm lg:text-base cursor-pointer"
               >
                 {item.name}
-              </a>
+              </button>
             ))}
           </div>
           
@@ -89,7 +102,7 @@ const Header = () => {
           onClick={() => setIsMenuOpen(false)}
         >
           <div 
-            className="fixed top-0 left-0 h-full w-4/5 max-w-sm bg-background shadow-lg z-50 transform transition-transform duration-300 ease-in-out"
+            className="fixed top-0 left-0 h-full w-4/5 max-w-sm bg-background shadow-lg z-50 transform transition-transform duration-300 ease-in-out animate-slideInLeft"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex flex-col h-full">
@@ -109,14 +122,13 @@ const Header = () => {
               {/* Навигационные ссылки */}
               <div className="flex flex-col py-4 flex-grow">
                 {navItems.map((item) => (
-                  <a
+                  <button
                     key={item.name}
-                    href={item.href}
-                    className="px-6 py-4 text-lg text-foreground hover:bg-luxury-gold/10 hover:text-luxury-gold transition-colors border-b border-border"
-                    onClick={() => setIsMenuOpen(false)}
+                    onClick={() => scrollToSection(item.id)}
+                    className="px-6 py-4 text-lg text-foreground hover:bg-luxury-gold/10 hover:text-luxury-gold transition-colors border-b border-border text-left"
                   >
                     {item.name}
-                  </a>
+                  </button>
                 ))}
               </div>
               

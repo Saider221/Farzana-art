@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 
 const ArtDeliveryInfo = () => {
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'hsl(var(--delivery-bg))' }}>
+    <section id="custom" className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'hsl(var(--delivery-bg))' }}>
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-4" style={{ color: 'hsl(var(--delivery-text))' }}>

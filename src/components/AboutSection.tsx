@@ -12,7 +12,7 @@ const AboutOrnament = () => (
 
 const AboutSection = () => {
   return (
-    <section className="py-20 px-6 relative" style={{ backgroundColor: 'hsl(var(--about-bg))' }}>
+    <section id="about" className="py-20 px-6 relative" style={{ backgroundColor: 'hsl(var(--about-bg))' }}>
       
 
         {/* About Me Section */}

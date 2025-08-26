@@ -93,7 +93,7 @@ const ArtTerapy = () => {
   }, []);
 
   return (
-    <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
+    <section id="art-therapy" className="py-16 px-4 sm:px-6 lg:px-8 bg-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-luxury-dark mb-4">

@@ -440,7 +440,7 @@ const GallerySection: React.FC = () => {
   ];
 
   return (
-    <section className="gallery-section py-16 px-6" style={{ backgroundColor: 'hsl(var(--gallery-bg))' }}>
+    <section id="gallery" className="gallery-section py-16 px-6" style={{ backgroundColor: 'hsl(var(--gallery-bg))' }}>
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">

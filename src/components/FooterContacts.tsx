@@ -3,7 +3,7 @@ import { Mail, Phone, Facebook, Instagram, Twitter } from 'lucide-react';
 
 const FooterContacts: React.FC = () => {
   return (
-    <footer className="w-full">
+    <footer id="contacts" className="w-full">
       {/* Верхняя секция: Контакты */}
       <section className="bg-luxury-beige py-10 px-4 text-center relative">
         <div className="max-w-4xl mx-auto">
@@ -61,10 +61,15 @@ const FooterContacts: React.FC = () => {
             
             <div className="flex flex-col items-center">
               <nav className="flex flex-wrap justify-center gap-4 mb-4">
-                <a href="/about" className="hover:text-luxury-gold transition-colors">Обо мне</a>
-                <a href="/shop" className="hover:text-luxury-gold transition-colors">Магазин</a>
-                <a href="/reviews" className="hover:text-luxury-gold transition-colors">Отзывы</a>
-                <a href="/" className="hover:text-luxury-gold transition-colors">Контакты</a>
+                <button onClick={() => { window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="hover:text-luxury-gold transition-colors">Главная</button>
+                <button onClick={() => { document.getElementById('gallery')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-luxury-gold transition-colors">Галерея</button>
+                <button onClick={() => { document.getElementById('styles')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-luxury-gold transition-colors">Стили</button>
+                <button onClick={() => { document.getElementById('reviews')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-luxury-gold transition-colors">Отзывы</button>
+                <button onClick={() => { document.getElementById('delivery')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-luxury-gold transition-colors">Доставка</button>
+                <button onClick={() => { document.getElementById('art-therapy')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-luxury-gold transition-colors">Арт-терапия</button>
+                <button onClick={() => { document.getElementById('custom')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-luxury-gold transition-colors">На заказ</button>
+                <button onClick={() => { document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-luxury-gold transition-colors">Обо мне</button>
+                <button onClick={() => { document.getElementById('contacts')?.scrollIntoView({ behavior: 'smooth' }); }} className="hover:text-luxury-gold transition-colors">Контакты</button>
               </nav>
               
               <div className="text-sm mt-4">
