@@ -28,7 +28,7 @@ const AboutSection = () => {
               style={{ borderColor: 'hsl(var(--about-accent))' }}
             >
               <img 
-                src="/public/foto1.jpg"
+                src="/foto1.jpg"
                 alt="Фарзана"
                 className="w-full h-full object-cover"
               />

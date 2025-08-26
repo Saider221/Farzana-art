@@ -50,11 +50,11 @@ const FooterContacts: React.FC = () => {
               <div className="space-y-2">
                 <div className="flex items-center justify-center md:justify-start gap-2">
                   <Phone className="h-4 w-4" />
-                  <span>+7 927 209 45 55</span>
+                  <span>+7 908 680-09-46</span>
                 </div>
                 <div className="flex items-center justify-center md:justify-start gap-2">
                   <Mail className="h-4 w-4" />
-                  <span>guzelkhai@yandex.ru</span>
+                  <span>mailto:kadyrova.farzana.98@mail.ru</span>
                 </div>
               </div>
             </div>
@@ -64,7 +64,6 @@ const FooterContacts: React.FC = () => {
                 <a href="/about" className="hover:text-luxury-gold transition-colors">Обо мне</a>
                 <a href="/shop" className="hover:text-luxury-gold transition-colors">Магазин</a>
                 <a href="/reviews" className="hover:text-luxury-gold transition-colors">Отзывы</a>
-                <a href="/" className="hover:text-luxury-gold transition-colors">Обо мне </a>
                 <a href="/" className="hover:text-luxury-gold transition-colors">Контакты</a>
               </nav>
               

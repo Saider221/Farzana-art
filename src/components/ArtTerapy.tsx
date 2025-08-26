@@ -198,9 +198,6 @@ const ArtTerapy = () => {
             </div>
             
             <div className="flex justify-center lg:justify-start pt-4">
-              <Button className="bg-luxury-gold hover:bg-luxury-gold/90 text-luxury-dark px-8 py-3 text-lg font-medium">
-                Записаться на сеанс
-              </Button>
             </div>
           </div>
         </div>
@@ -312,9 +309,7 @@ const ArtTerapy = () => {
             </div>
             
             <div className="flex justify-center lg:justify-start pt-4">
-              <Button className="bg-luxury-gold hover:bg-luxury-gold/90 text-luxury-dark px-8 py-3 text-lg font-medium">
-                Записаться на сеанс
-              </Button>
+             
             </div>
           </div>
         </div>

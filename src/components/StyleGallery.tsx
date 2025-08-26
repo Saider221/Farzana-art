@@ -6,10 +6,10 @@ import { useState } from "react";
 const StyleGallery = () => {
   const styles = [
     {
-      title: "Стиль",
+      title: "",
       subtitle: "Интерьерная фотосъемка",
       description: "Минималистичный скандинавский стиль с акцентом на функциональность и уют",
-      image: "/public/cartina1."
+      image: "/cartina3iz1.png"
     },
     {
       title: "Стиль", 

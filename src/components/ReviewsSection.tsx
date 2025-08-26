@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 
 const reviews = [
   {
-    image: "/placeholder.svg",
+    image: "/cartina3iz1.png",
     caption:
       "Дизайнер Алсу о картине “Чыгарсын Мэн каршы алырга”",
     frameBg: "bg-[#1f1a17]",

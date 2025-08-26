@@ -65,7 +65,7 @@ const Header = () => {
           
           <div className="flex items-center space-x-2 sm:space-x-4">
             {/* Иконки WhatsApp и Telegram */}
-            <a href="https://wa.me/ваш_номер" target="_blank" rel="noopener noreferrer">
+            <a href="https://wa.me/c/79086800946" target="_blank" rel="noopener noreferrer">
               <Button variant="ghost" size="icon" className="text-luxury-gold hover:text-luxury-gold/80">
                 <MessageCircle className="h-5 w-5" />
               </Button>
@@ -126,7 +126,7 @@ const Header = () => {
               {/* Футер меню с контактами */}
               <div className="p-4 border-t space-y-3">
                 <div className="flex justify-center space-x-4">
-                  <a href="https://wa.me/ваш_номер" target="_blank" rel="noopener noreferrer">
+                  <a href="https://wa.me/c/79086800946" target="_blank" rel="noopener noreferrer">
                     <Button variant="outline" size="icon" className="text-luxury-gold border-luxury-gold">
                       <MessageCircle className="h-5 w-5" />
                     </Button>
