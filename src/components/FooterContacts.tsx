@@ -64,10 +64,8 @@ const FooterContacts: React.FC = () => {
                 <a href="/about" className="hover:text-luxury-gold transition-colors">Обо мне</a>
                 <a href="/shop" className="hover:text-luxury-gold transition-colors">Магазин</a>
                 <a href="/reviews" className="hover:text-luxury-gold transition-colors">Отзывы</a>
-                <a href="/custom" className="hover:text-luxury-gold transition-colors">На заказ</a>
-                <a href="/prices" className="hover:text-luxury-gold transition-colors">Стоимость</a>
-                <a href="/delivery" className="hover:text-luxury-gold transition-colors">Доставка и оплата</a>
-                <a href="/contacts" className="hover:text-luxury-gold transition-colors">Контакты</a>
+                <a href="/" className="hover:text-luxury-gold transition-colors">Обо мне </a>
+                <a href="/" className="hover:text-luxury-gold transition-colors">Контакты</a>
               </nav>
               
               <div className="text-sm mt-4">

@@ -12,7 +12,7 @@ type Collaboration = {
 
 const collaborations: Collaboration[] = [
   {
-    title: "SABR",
+    title: "",
     subtitle:
       "Самый большой в России монобрендовый магазин сегмента modest fashion",
     taskLabel: "Задача",

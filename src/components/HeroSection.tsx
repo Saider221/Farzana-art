@@ -53,12 +53,6 @@ const HeroSection = () => {
                 >
                   Подробная информация →
                 </Button>
-                <Button 
-                  onClick={() => setShowPayment(true)}
-                  className="bg-luxury-gold text-luxury-dark hover:bg-luxury-gold/90 transition-all duration-300 px-6 sm:px-8 py-2 sm:py-3"
-                >
-                  Тестовая оплата
-                </Button>
               </div>
             </div>
           </div>
