@@ -8,7 +8,7 @@ const ArtTerapy = () => {
   const [isMuted, setIsMuted] = useState(true);
   const [videoError, setVideoError] = useState(false);
 
-  // Для видео в секции "Для детей"
+  
   const videoRef2 = useRef<HTMLVideoElement>(null);
   const [isPlaying2, setIsPlaying2] = useState(true);
   const [isMuted2, setIsMuted2] = useState(true);
@@ -126,7 +126,7 @@ const ArtTerapy = () => {
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-luxury-dark mb-4">
-            Арт-терапия с Фарзаной
+            Арт-терапия
           </h2>
           <div className="w-24 h-1 bg-luxury-gold mx-auto"></div>
         </div>
@@ -142,6 +142,7 @@ const ArtTerapy = () => {
                   <div className="text-center text-luxury-dark">
                     <p className="text-lg font-medium mb-2">Видео недоступно</p>
                     <p className="text-sm opacity-80">Арт-терапия с Фарзаной</p>
+                
                   </div>
                 </div>
               ) : (
@@ -215,7 +216,7 @@ const ArtTerapy = () => {
             <div className="pt-4">
               <div className="bg-luxury-beige p-6 rounded-lg border-l-4 border-luxury-gold">
                 <p className="text-luxury-dark font-semibold text-lg">
-                  Стоимость участия: <span className="text-luxury-gold">2 500 ₽ / человек</span>
+                  Стоимость участия: <span className="text-luxury-dark">2 500 ₽ / человек</span>
                 </p>
               </div>
             </div>
@@ -326,7 +327,7 @@ const ArtTerapy = () => {
             <div className="pt-4">
               <div className="bg-luxury-beige p-6 rounded-lg border-l-4 border-luxury-gold">
                 <p className="text-luxury-dark font-semibold text-lg">
-                  Стоимость: <span className="text-luxury-gold">1 500 ₽ / ребёнок</span>
+                  Стоимость: <span className="text-luxury-dark">1 500 ₽ / ребёнок</span>
                 </p>
               </div>
             </div>

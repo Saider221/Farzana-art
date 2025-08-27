@@ -4,25 +4,30 @@ import { useState, useEffect } from "react";
 
 const reviews = [
   {
-    image: "/cartina3iz1.png",
+    image: "/commentarion1.png",
     caption:
-      "Дизайнер Алсу о картине “Чыгарсын Мэн каршы алырга”",
+      "”",
     frameBg: "bg-[#1f1a17]",
   },
   {
-    image: "/placeholder.svg",
-    caption: "Дизайнер Джамиля о совместном проекте",
+    image: "/commentarion2.png",
+    caption: "",
     frameBg: "bg-[#1b1b1b]",
   },
   {
-    image: "/placeholder.svg",
-    caption: "Доктор Лисян о серии приобретенных картин",
+    image: "/commentarion3.",
+    caption: "",
     frameBg: "bg-[#2a241f]",
   },
   {
-    image: "/placeholder.svg",
+    image: "/commentarion4.",
+    
+    frameBg: "bg-[#b7aa93]",
+  },
+  {
+    image: "/commentarion5.",
     caption:
-      "Маркетолог Ольга Кудышкина о пляжной картине",
+      "",
     frameBg: "bg-[#b7aa93]",
   },
 ];

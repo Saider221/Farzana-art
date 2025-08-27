@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import PaymentForm from '@/components/PaymentForm';
-import { X, ShoppingCart } from 'lucide-react';
+import FixedPaymentForm from '@/components/FixedPaymentForm';
+import { X, ShoppingCart, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface PaintingCardProps {
   image: string;
@@ -19,14 +20,41 @@ const PaintingDetailsModal: React.FC<{
   onClose: () => void; 
   onBuy: () => void 
 }> = ({ painting, onClose, onBuy }) => {
-  const [selectedImage, setSelectedImage] = useState(painting.image);
+  const [currentIndex, setCurrentIndex] = useState(0);
   
   // Собираем все изображения (основное + дополнительные)
   const allImages = [painting.image, ...(painting.additionalImages || [])];
   
+  // Функции для навигации по карусели
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === 0 ? allImages.length - 1 : prevIndex - 1
+    );
+  };
+  
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) => 
+      prevIndex === allImages.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+  
+  // Установка конкретного изображения
+  const setSelectedImage = (index: number) => {
+    setCurrentIndex(index);
+  };
+  
+  // Автоматическая смена изображений каждые 5 секунд
+  useEffect(() => {
+    const interval = setInterval(() => {
+      goToNext();
+    }, 5000);
+    
+    return () => clearInterval(interval);
+  }, [currentIndex, allImages.length]);
+  
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-2 sm:p-4 animate-fadeIn">
-      <div className="bg-white rounded-lg w-full max-w-4xl max-h-[95vh] overflow-y-auto animate-slideUp">
+    <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-2 sm:p-4 animate-fadeIn">
+      <div className="bg-white rounded-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto animate-slideUp">
         <div className="sticky top-0 bg-white border-b p-4 flex justify-between items-center">
           <h3 className="text-lg sm:text-xl font-bold">Детали картины</h3>
           <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8">
@@ -34,37 +62,80 @@ const PaintingDetailsModal: React.FC<{
           </Button>
         </div>
         <div className="p-4 sm:p-6">
-          <div className="grid grid-cols-1 gap-6">
-            <div className="aspect-[3/4] overflow-hidden rounded-lg">
-              <img 
-                src={selectedImage} 
-                alt={painting.title}
-                className="w-full h-full object-cover"
-              />
+          <div className="space-y-6">
+            {/* Основное изображение с каруселью */}
+            <div className="relative group">
+              <div className="aspect-[3/4] overflow-hidden rounded-lg relative bg-gray-50 flex items-center justify-center">
+                <img 
+                  src={allImages[currentIndex]} 
+                  alt={`${painting.title} ${currentIndex + 1}`}
+                  className="w-full h-full object-contain transition-opacity duration-300"
+                />
+                
+                {/* Навигационные кнопки */}
+                {allImages.length > 1 && (
+                  <>
+                    <button
+                      onClick={goToPrevious}
+                      className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all opacity-0 hover:opacity-100 focus:opacity-100 group-hover:opacity-100"
+                      aria-label="Предыдущее изображение"
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <button
+                      onClick={goToNext}
+                      className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all opacity-0 hover:opacity-100 focus:opacity-100 group-hover:opacity-100"
+                      aria-label="Следующее изображение"
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                    
+                    {/* Индикаторы */}
+                    <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
+                      {allImages.map((_, index) => (
+                        <button
+                          key={index}
+                          onClick={() => setSelectedImage(index)}
+                          className={`w-3 h-3 rounded-full transition-all ${
+                            index === currentIndex ? 'bg-white scale-125' : 'bg-white/50'
+                          }`}
+                          aria-label={`Показать изображение ${index + 1}`}
+                        />
+                      ))}
+                    </div>
+                  </>
+                )}
+              </div>
             </div>
             
-            {/* Дополнительные изображения */}
+            {/* Миниатюры изображений внизу */}
             {allImages.length > 1 && (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-2">
-                {allImages.map((img, index) => (
-                  <div 
-                    key={index}
-                    className={`aspect-square overflow-hidden rounded cursor-pointer border-2 ${
-                      selectedImage === img ? 'border-luxury-gold' : 'border-transparent'
-                    }`}
-                    onClick={() => setSelectedImage(img)}
-                  >
-                    <img 
-                      src={img} 
-                      alt={`${painting.title} ${index + 1}`}
-                      className="w-full h-full object-cover hover:opacity-80 transition-opacity"
-                    />
-                  </div>
-                ))}
+              <div className="pt-4">
+                <h4 className="text-sm font-medium text-gray-700 mb-2">Другие изображения:</h4>
+                <div className="flex space-x-2 overflow-x-auto pb-2">
+                  {allImages.map((img, index) => (
+                    <div 
+                      key={index}
+                      className={`flex-shrink-0 w-20 h-20 overflow-hidden rounded cursor-pointer border-2 transition-all ${
+                        index === currentIndex 
+                          ? 'border-luxury-gold shadow-md' 
+                          : 'border-transparent hover:border-luxury-gold/50'
+                      }`}
+                      onClick={() => setSelectedImage(index)}
+                    >
+                      <img 
+                        src={img} 
+                        alt={`${painting.title} ${index + 1}`}
+                        className="w-full h-full object-cover hover:opacity-90 transition-opacity"
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
             
-            <div className="space-y-4">
+            {/* Информация о картине */}
+            <div className="space-y-4 border-t pt-4">
               <div>
                 <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{painting.title}</h2>
                 <p className="text-sm sm:text-base text-muted-foreground">{painting.dimensions}</p>
@@ -76,7 +147,7 @@ const PaintingDetailsModal: React.FC<{
                 </div>
               )}
               
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2">
                 <span className="text-xl sm:text-2xl font-bold" style={{ color: 'hsl(var(--price-color))' }}>
                   {painting.price}
                 </span>
@@ -105,9 +176,12 @@ const PaintingDetailsModal: React.FC<{
   );
 };
 
-const PaintingCard: React.FC<PaintingCardProps> = ({ image, title, dimensions, price, id, description }) => {
+const PaintingCard: React.FC<PaintingCardProps> = ({ image, title, dimensions, price, id, description, additionalImages }) => {
   const [showPayment, setShowPayment] = useState(false);
   const [showDetails, setShowDetails] = useState(false);
+  
+  // Убедимся, что additionalImages - это массив
+  const safeAdditionalImages = Array.isArray(additionalImages) ? additionalImages : [];
   
   const handleBuyClick = () => {
     setShowPayment(true);
@@ -129,10 +203,11 @@ const PaintingCard: React.FC<PaintingCardProps> = ({ image, title, dimensions, p
             <h3 className="text-xl font-bold">Оплата картины</h3>
           </div>
           <div className="p-4">
-            <PaymentForm 
+            <FixedPaymentForm 
               paintingId={id}
               amount={numericPrice}
               description={`Покупка картины: ${title}`}
+              title={title}
             />
           </div>
           <div className="p-4 border-t">
@@ -151,9 +226,20 @@ const PaintingCard: React.FC<PaintingCardProps> = ({ image, title, dimensions, p
 
   // Если открыто модальное окно с деталями, показываем его
   if (showDetails) {
+    // Создаем объект картины с правильными данными
+    const paintingData = {
+      image,
+      title,
+      dimensions,
+      price,
+      id,
+      description,
+      additionalImages: safeAdditionalImages
+    };
+    
     return (
       <PaintingDetailsModal 
-        painting={{ image, title, dimensions, price, id, description }} 
+        painting={paintingData}
         onClose={() => setShowDetails(false)} 
         onBuy={handleBuyClick} 
       />
@@ -225,11 +311,11 @@ const GallerySection: React.FC = () => {
   const yaktuSeries = [
     {
       id: 1,
-      image: '/cartina1.jpg',
+      image: '/cartina1iz.png',
       additionalImages: [
-        '/cartina10iz1.png',
-        '/cartina3iz1.png',
-        '/cartina4iz1.png'
+        '/cartina1iz1.png',
+        '/cartina1iz2.png',
+        '/cartina1iz3.png'
       ],
       title: "Шепот",
       dimensions: "Картина 90×90, тестурная паста, масло, акрил, выполнена в смешанной техники (скульптурная ЖИВОПИСЬ).",
@@ -238,10 +324,12 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 2,
-      image: '/',
+      image: '/cartina2iz4.png',
       additionalImages: [
-        '/cartina3iz2.png',
-        '/cartina3iz3.png'
+        '/cartina2iz2.png',
+        '/cartina2iz3.png',
+        '/cartina2iz1.png',
+        '/cartina2iz5.png'
       ],
       title: "Габбех",
       dimensions: "Картина 100x80, текстурная паста, золотая поталь, акрил, позолоченные бусы.",
@@ -250,10 +338,12 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 3,
-      image: '/cartina3iz1.png',
+      image: '/cartina4iz6.png',
       additionalImages: [
-        '/cartina3iz2.png',
-        '/cartina3iz3.png'
+        '/cartina4iz4.png',
+        '/cartina4iz5.png',
+        '/cartina4iz.png',
+        '/cartina4iz7.png'
       ],
       title: "Мактуб",
       dimensions: "80 × 80  ",
@@ -262,52 +352,52 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 4,
-      image: '/cartina4iz1.png',
+      image: '/cartina5iz1.png',
       additionalImages: [
-        '/cartina4iz2.png',
-        '/cartina4iz3.png'
+        '/cartina5iz2.png',
+        '/cartina5iz3.png',
+        '/cartina5iz4.png',
+        '/cartina5iz5.png'
       ],
-      title: "Юдифь и Олоферн",
-      dimensions: "100 × 70 × 3см | холст",
-      price: "15 000 ₽",
-      description: "Юдифь и Олоферн - картина австрийского художника Густава Климта на известный библейский сюжет. В картине Юдифь несет в себе идею всепоглощающей, обволакивающей власти женского очарования и тайны женского начала. Отличный подарок для восхитительных женщин и мужчин, которые понимают женскую природу"
+      title: "Расплавленное солнце",
+      dimensions: "100 × 90 × 3см | холст",
+      price: "16 000 ₽",
+      description: "Размер 100x90, материалы: текстурная паста, акрил, золотая поталь, выполнена в технике состаривания.  Картина из далеких песчаных барханов. Где снежные барханы мерцают. Где злой султан вечно правит…"
     }
   ];
 
   const ladyTatarstanSeries = [
     {
       id: 5,
-      image: '/cartina3iz1.png',
+      image: '/cartina6iz1.png',
       additionalImages: [
-        '/cartina3iz2.png',
-        '/cartina3iz3.png'
+        '/cartina6iz2.png'
       ],
-      title: "Расплавленное солнце",
-      dimensions: "Размер 100x90, материалы: текстурная паста, акрил, золотая поталь, выполнена в технике состаривания.",
-      price: "16 000 ₽",
-      description: "Картина из далеких песчаных барханов. Где снежные барханы мерцают. Где злой султан вечно правит…"
+      title: "Цветок пустыни",
+      dimensions: "Размер 50x40, материалы: текстурная паста, акрил, золотая поталь, выполнена в технике состаривания.",
+      price: "15 000 ₽",
+      description: "Картина 50x40, акрил. Картина написана по мотивам персидской сказки о любви «Габбех». История о том, как девушка мечтает сбежать вместе с возлюбленным и скрыться в бесконечной пустыне - это вечно перерождающийся из поколения в поколение аксиома Ближнего Востока."
     }
   ];
 
   const chelochekSeries = [
     {
       id: 6,
-      image: '/cartina1.jpg',
+      image: '/cartina4iz1.png',
       additionalImages: [
-        '/photo_2025-08-15_14-10-19.jpg',
-        '/photo_2025-08-15_14-10-30.jpg'
+        
       ],
-      title: "Цветок пустыни ",
+      title: "Юдифь и Олоферн ",
       dimensions: "Картина 50x40, акрил. ",
       price: "15 000 ₽",
-      description: "Картина написана по мотивам персидской сказки о любви «Габбех». История о том, как девушка мечтает сбежать вместе с возлюбленным и скрыться в бесконечной пустыне - это вечно перерождающийся из поколения в поколение аксиома Ближнего Востока."
+      description: "Юдифь и Олоферн - картина австрийского художника Густава Климта на известный библейский сюжет. В картине Юдифь несет в себе идею всепоглощающей, обволакивающей власти женского очарования и тайны женского начала. Отличный подарок для восхитительных женщин и мужчин, которые понимают женскую природу."
     },
     {
       id: 7,
       image: '/pocel.png',
       additionalImages: [
-        '/pomovka.png',
-        '/photo_2025-08-15_14-10-14.jpg'
+      '/pocel.png', 
+
       ],
       title: "Поцелуй",
       dimensions: "Картина 70x70. Копия картины Густава Климта.",
@@ -316,10 +406,9 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 8,
-      image: '/cartina8iz2.png',
+      image: '/pomovka.png',
       additionalImages: [
-        '/cartina8iz2.png',
-        '/cartina8iz3.png'
+        
       ],
       title: "Помолвка",
       dimensions: "Картина 70x50, акрил.",
@@ -330,8 +419,8 @@ const GallerySection: React.FC = () => {
       id: 9,
       image: '/cartina9iz5.png',
       additionalImages: [
-        '/photo_2025-08-15_14-12-02.jpg',
-        '/photo_2025-08-15_14-12-06.jpg'
+        '/cartina12iz1.png',
+        '/cartina12iz2.png'
       ],
       title: "Сура Аль-Фатиха.",
       dimensions: "100 × 70 × 3см | холст",
@@ -343,22 +432,21 @@ const GallerySection: React.FC = () => {
   const desertCollection = [
     {
       id: 10,
-      image: '/cartina3iz1.png',
+      image: '/cartina13iz1.png',
       additionalImages: [
-        '/photo_2025-08-15_14-12-09.jpg',
-        '/photo_2025-08-15_14-10-14.jpg'
+        '/cartina13iz2.png'
       ],
       title: "Посланник",
       dimensions: "Картина 50x40, выполнена в смешанной технике, акрил, текстурная паста, золотая поталь и дополнительные элементы. ",
       price: "25 000 ₽",
       description: "У лисиц есть норы, и у птиц небесных-гнезда, а Сыну Человеческому негде и голову приклонить…"
-    },
+    },    
     {
       id: 11,
-      image: '/photo_2025-08-15_14-10-19.jpg',
+      image: '/cartina14iz1.png',
       additionalImages: [
-        '/photo_2025-08-15_14-10-30.jpg',
-        '/photo_2025-08-15_14-11-53.jpg'
+        '/cartina15iz1.png',
+        '/cartina15iz2.jpg'
       ],
       title: "Молитва",
       dimensions: "80 × 60 × 3см | холст",
@@ -367,10 +455,11 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 12,
-      image: '/cartina3iz1.png',
+      image: '/cartina15iz5.png',
       additionalImages: [
-        '/cartina3iz2.png',
-        '/cartina3iz3.png'
+        '/cartina16iz1.png',
+        '/cartina16iz2.jpg',
+        '/cartina16iz3.png'
       ],
       title: "Сумасшедший",
       dimensions: "Картина 50x40, акрил.",
@@ -379,10 +468,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 13,
-      image: '/photo_2025-08-15_14-11-58.jpg',
+      image: '/cartina1iz1.png',
       additionalImages: [
-        '/photo_2025-08-15_14-12-02.jpg',
-        '/photo_2025-08-15_14-12-06.jpg'
+        '/cartina1iz2.png',
+        '/cartina1iz3.png'
       ],
       title: "Рассвет",
       dimensions: "Картина 30x30, масло, текстурная паста.",
@@ -391,10 +480,9 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 14,
-      image: '/cartina3iz1.png',
+      image: '/cartina1iz4.png',
       additionalImages: [
-        '/cartina3iz2.png',
-        '/cartina3iz3.png'
+        '/cartina1iz5.png'
       ],
       title: "Гость",
       dimensions: "80 × 60 × 3см | холст",
@@ -403,10 +491,9 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 15,
-      image: '/photo_2025-08-15_14-11-58.jpg',
+      image: '/cartina1iz2.png',
       additionalImages: [
-        '/photo_2025-08-15_14-12-02.jpg',
-        '/photo_2025-08-15_14-12-06.jpg'
+        '/cartina1iz3.png'
       ],
       title: "Звездная ночь",
       dimensions: "Картина 30x40, копия картины Ван Гога.",
@@ -415,45 +502,48 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 16,
-      image: '/cartina3iz1.png',
+      image: '/cartina1iz3.png',
       additionalImages: [
-        '/cartina3iz2.png',
-        '/cartina3iz3.png'
+        '/cartina1iz4.png',
+        '/cartina1iz5.png'
       ],
       title: "Три возраста женщины",
       dimensions: "Копия картины Густава Климта. Материалы: акрил, золотая поталь.",
-      price: "25 000,00 ₽",
+      price: "15 000,00 ₽",
       description: "На полотне изображена молодая женщина со спящим ребёнком на руках — мирская Мадонна, сама погружённая в состояние, похожее на сон, пассивная, стилизованная, вплетённая в орнаментальный фон полотна."
     },
     {
       id: 17,
-      image: '/cartina3iz1.png',
+      image: '/cartina1iz5.png',
       additionalImages: [
-        '/cartina3iz2.png',
-        '/cartina3iz3.png'
+        '/cartina1iz1.png',
+        '/cartina1iz2.png'
       ],
       title: "Пустыня",
       dimensions: "Картина 50x40, текстурная паста, золотая поталь, акрил.",
-      price: "25 000,00 ₽",
+      price: "15 000,00 ₽",
       description: "Картина написанная по мотивам сказки «Сын Адама»… Как же жалок сын Адама, которому поднять камень легче, чем простить…"
     }
   ];
 
   // Объединяем все картины в один массив
   const allPaintings = [
-    // Серия Яркту
+    
     ...yaktuSeries,
-    // Серия Lady Tatarstan
+    
     ...ladyTatarstanSeries,
-    // Серия Челочек
+    
     ...chelochekSeries,
-    // Пустынная коллекция
+    
     ...desertCollection
   ];
 
   return (
-    <section id="gallery" className="gallery-section py-16 px-6" style={{ backgroundColor: 'hsl(var(--gallery-bg))' }}>
-      <div className="max-w-7xl mx-auto">
+    <section id="gallery" className="gallery-section py-16 px-6 relative overflow-hidden" 
+             style={{ backgroundColor: 'hsl(var(--gallery-bg))', backgroundImage: 'url(/)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      {/* Background overlay for better text readability */}
+      <div className="absolute inset-0 bg-background/70 "></div>
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-foreground mb-2">МАГАЗИН</h2>

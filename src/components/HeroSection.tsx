@@ -7,7 +7,10 @@ const HeroSection = () => {
   const [showPayment, setShowPayment] = useState(false);
 
   return (
-    <section id="hero" className="min-h-screen bg-background relative overflow-hidden">
+    <section id="hero" className="min-h-screen bg-background relative overflow-hidden" 
+             style={{ backgroundImage: 'url(/fonherosection.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
+      {/* Background overlay for better text readability */}
+      <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
       {/* Decorative elements */}
       <div className="absolute top-10 left-10 sm:top-20 sm:left-20 text-luxury-gold/30 hidden md:block">
         <Star className="h-6 w-6 sm:h-8 sm:w-8" />
@@ -22,7 +25,7 @@ const HeroSection = () => {
         <Plus className="h-6 w-6 sm:h-8 sm:w-8" />
       </div>
       
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 flex items-center min-h-screen">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-20 flex items-center min-h-screen relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 items-center w-full">
           {/* Left Content */}
           <div className="space-y-8">
@@ -51,31 +54,33 @@ const HeroSection = () => {
             </div>
           </div>
           
-          {/* Right Content - Desert Pattern */}
+          {/* Right Content - Author Photo */}
           <div className="relative flex justify-center">
             <div className="w-full max-w-lg">
-              <div className="w-full h-80 sm:h-96 lg:h-[500px] relative">
-                <div className="absolute inset-0 bg-gradient-to-br from-luxury-gold/20 to-luxury-brown/40 rounded-lg overflow-hidden">
-                  {/* Simulated desert pattern */}
-                  <div className="absolute inset-0 opacity-60">
-                    <div className="w-full h-full bg-gradient-to-br from-amber-200/30 to-amber-600/30 rounded-lg">
-                      <div className="absolute inset-0 opacity-20 bg-gradient-to-br from-luxury-gold/10 to-luxury-brown/20"></div>
-                    </div>
-                  </div>
+              <div className="w-full h-80 sm:h-96 lg:h-[500px] relative group">
+                {/* Photo frame with gold border and shadow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-luxury-gold/40 to-luxury-brown/60 rounded-xl overflow-hidden shadow-2xl">
+                  {/* Inner frame effect */}
+                  <div className="absolute inset-3 border-2 border-luxury-gold/50 rounded-lg"></div>
                   
-                  {/* Frame effect */}
-                  <div className="absolute inset-4 border-2 border-luxury-gold/30 rounded-lg"></div>
-                  
-                  {/* Content overlay */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="text-center space-y-4">
-                      <div className="w-24 h-24 sm:w-32 sm:h-32 mx-auto bg-luxury-gold/20 rounded-full flex items-center justify-center backdrop-blur-sm">
-                        <Sparkles className="h-8 w-8 sm:h-12 sm:w-12 text-luxury-gold" />
-                      </div>
-                      <p className="text-luxury-beige text-sm font-medium">Узоры пустыни</p>
-                    </div>
+                  {/* Author photo */}
+                  <div className="absolute inset-5 overflow-hidden rounded-md">
+                    <img 
+                      src="/foto1.jpg" 
+                      alt="Фарзана - современный арабский художник" 
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
                   </div>
                 </div>
+                
+                {/* Decorative corner elements */}
+                <div className="absolute -top-3 -left-3 w-8 h-8 border-l-2 border-t-2 border-luxury-gold/60 rounded-tl-xl"></div>
+                <div className="absolute -top-3 -right-3 w-8 h-8 border-r-2 border-t-2 border-luxury-gold/60 rounded-tr-xl"></div>
+                <div className="absolute -bottom-3 -left-3 w-8 h-8 border-l-2 border-b-2 border-luxury-gold/60 rounded-bl-xl"></div>
+                <div className="absolute -bottom-3 -right-3 w-8 h-8 border-r-2 border-b-2 border-luxury-gold/60 rounded-br-xl"></div>
+                
+                {/* Subtle glow effect */}
+                <div className="absolute inset-0 rounded-xl shadow-[0_0_30px_rgba(180,140,80,0.3)]"></div>
               </div>
             </div>
           </div>

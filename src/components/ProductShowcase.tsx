@@ -27,11 +27,11 @@ const ProductShowcase = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
-            ЧУВСТВОВАТЬ СЕБЯ ЧАСТЬЮ БОГАТОЙ КУЛЬТУРЫ
+            ИСКУССТВО БЫТЬ 
+            
           </h2>
           <p className="text-lg text-luxury-dark/70 max-w-3xl mx-auto px-4">
-            Окружать себя и близких красотой искусства
-            Передавать наследие следующим поколениям
+            Быть частью искусства-это писать свою историю, окружать себя и близких красотой природы, превращая каждый день в шедевр...
           </p>
         </div>
         
@@ -74,16 +74,14 @@ const ProductShowcase = () => {
                         onLoadedData={handleVideoLoad}
                         onLoadStart={() => setVideoLoading(true)}
                       >
-                        <source src="/videos/main-product-video.mp4" type="video/mp4" />
+                        <source src="/videos/video5.mp4" type="video/mp4" />
                         Ваш браузер не поддерживает видео.
                       </video>
                     </>
                   )}
                   <div className="absolute inset-0 bg-gradient-to-br from-transparent to-blue-900/20"></div>
                   <div className="absolute bottom-4 left-4 right-8">
-                    <Badge variant="secondary" className="bg-white/90 text-luxury-dark">
-                      Новая коллекция
-                    </Badge>
+                    
                   </div>
                 </div>
               </div>

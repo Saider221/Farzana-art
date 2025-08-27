@@ -13,6 +13,9 @@ export default async function handler(req, res) {
       isTest = 1  // 1 для тестового режима
     } = req.body;
 
+    // Логирование входящих параметров
+    console.log('Payment init request:', { amount, orderId, description, isTest });
+
     // Проверка обязательных параметров
     if (!amount || !orderId || !description) {
       return res.status(400).json({ error: 'Missing required parameters' });
@@ -21,6 +24,12 @@ export default async function handler(req, res) {
     // Переменные окружения будут автоматически доступны на Vercel
     const merchantLogin = process.env.ROBOKASSA_LOGIN;
     const password1 = process.env.ROBOKASSA_PASSWORD1;
+
+    // Логирование переменных окружения (без паролей!)
+    console.log('Environment variables:', { 
+      merchantLogin: merchantLogin ? 'SET' : 'NOT SET',
+      password1: password1 ? 'SET' : 'NOT SET'
+    });
 
     // Проверка наличия необходимых переменных окружения
     if (!merchantLogin || !password1) {
@@ -35,6 +44,10 @@ export default async function handler(req, res) {
       .update(signatureString)
       .digest('hex');
 
+    // Логирование для отладки
+    console.log('Signature string:', signatureString);
+    console.log('Generated signature:', signature);
+
     // Формируем URL для редиректа на Robokassa
     const redirectUrl = `https://auth.robokassa.ru/Merchant/Index.aspx?` +
       `MerchantLogin=${encodeURIComponent(merchantLogin)}&` +
@@ -44,6 +57,8 @@ export default async function handler(req, res) {
       `SignatureValue=${signature}&` +
       `Culture=ru&` +
       `IsTest=${isTest}`;
+
+    console.log('Redirect URL:', redirectUrl);
 
     res.status(200).json({ 
       status: 'success',

@@ -6,8 +6,41 @@
 All colors MUST be HSL.
 */
 
+/* Подключение кастомного шрифта Raleway */
+@font-face {
+  font-family: 'Raleway';
+  src: url('/fonts/Raleway-Regular.woff2') format('woff2'),
+       url('/fonts/Raleway-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Raleway';
+  src: url('/fonts/Raleway-Bold.woff2') format('woff2'),
+       url('/fonts/Raleway-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-raleway {
+  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'WDXL Lubrifont TC', "Segoe UI", Arial, sans-serif;
+}
+
+.font-system {
+  font-family: -apple-system, BlinkMacSystemFont, 'WDXL Lubrifont TC', "Segoe UI", Arial, sans-serif;
+}
+
 html {
   scroll-behavior: smooth;
+  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'WDXL Lubrifont TC', "Segoe UI", Arial, sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Raleway', -apple-system, BlinkMacSystemFont, 'WDXL Lubrifont TC', "Segoe UI", Arial, sans-serif;
+  font-weight: bold;
 }
 
 @layer base {
@@ -117,7 +150,7 @@ html {
   
   .gallery-section {
     /* Scoped color system for GallerySection */
-    --background: 45 20% 95%;
+    --background: ;
     --foreground: 25 15% 15%;
 
     --card: 0 0% 100%;
