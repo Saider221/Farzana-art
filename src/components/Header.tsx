@@ -27,7 +27,7 @@ const Header = () => {
     }
   }, [isMobile]);
 
-  // Функция для прокрутки к секции
+  
   const scrollToSection = (sectionId: string) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -38,11 +38,11 @@ const Header = () => {
 
   const navItems = [
     { name: "Главная", id: "hero" },
-    { name: "Галерея", id: "gallery" },
-    { name: "Стили", id: "styles" },
-    { name: "Отзывы", id: "reviews" },
-    { name: "Доставка", id: "delivery" },
+    { name: "Магазин картин", id: "gallery" },
+    // { name: "Стили", id: "styles" },
     { name: "Арт-терапия", id: "art-therapy" },
+    { name: "Отзывы", id: "reviews" },
+    { name: "Доставка", id: "delivery" }, 
     { name: "На заказ", id: "custom" },
     { name: "Обо мне", id: "about" },
     { name: "Контакты", id: "contacts" }

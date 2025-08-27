@@ -84,12 +84,41 @@ const ArtTerapy = () => {
 
   // Автовоспроизведение при монтировании компонента
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.muted = true;
-    }
-    if (videoRef2.current) {
-      videoRef2.current.muted = true;
-    }
+    const playVideo = (videoRef: React.RefObject<HTMLVideoElement>, setIsPlaying: React.Dispatch<React.SetStateAction<boolean>>) => {
+      if (videoRef.current) {
+        videoRef.current.muted = true;
+        // Попытка начать воспроизведение
+        const playPromise = videoRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              // Автовоспроизведение успешно началось
+              setIsPlaying(true);
+            })
+            .catch(error => {
+              // Автовоспроизведение заблокировано браузером
+              console.log("Автовоспроизведение заблокировано:", error);
+              setIsPlaying(false);
+            });
+        }
+      }
+    };
+
+    // Для видео взрослых
+    playVideo(videoRef, setIsPlaying);
+    
+    // Для видео детей
+    playVideo(videoRef2, setIsPlaying2);
+
+    // Очистка при размонтировании
+    return () => {
+      if (videoRef.current) {
+        videoRef.current.pause();
+      }
+      if (videoRef2.current) {
+        videoRef2.current.pause();
+      }
+    };
   }, []);
 
   return (
@@ -123,11 +152,11 @@ const ArtTerapy = () => {
                     muted={isMuted}
                     loop
                     playsInline
+                    preload="auto"
                     className="w-full h-full object-cover"
                     onError={handleVideoError}
-                    onLoadedData={handleVideoLoad}
                   >
-                    <source src="/videos/art-therapy-video.mp4" type="video/mp4" />
+                    <source src="/videos/terapyartadults.mp4" type="video/mp4" />
                     Ваш браузер не поддерживает видео.
                   </video>
                   
@@ -223,11 +252,11 @@ const ArtTerapy = () => {
                     muted={isMuted2}
                     loop
                     playsInline
+                    preload="auto"
                     className="w-full h-full object-cover"
                     onError={handleVideoError2}
-                    onLoadedData={handleVideoLoad2}
                   >
-                    <source src="/videos/art-therapy-children.mp4" type="video/mp4" />
+                    <source src="/videos/terapyartchildren.mp4" type="video/mp4" />
                     Ваш браузер не поддерживает видео.
                   </video>
                   

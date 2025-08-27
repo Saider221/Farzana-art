@@ -439,6 +439,18 @@ const GallerySection: React.FC = () => {
     }
   ];
 
+  // Объединяем все картины в один массив
+  const allPaintings = [
+    // Серия Яркту
+    ...yaktuSeries,
+    // Серия Lady Tatarstan
+    ...ladyTatarstanSeries,
+    // Серия Челочек
+    ...chelochekSeries,
+    // Пустынная коллекция
+    ...desertCollection
+  ];
+
   return (
     <section id="gallery" className="gallery-section py-16 px-6" style={{ backgroundColor: 'hsl(var(--gallery-bg))' }}>
       <div className="max-w-7xl mx-auto">
@@ -446,30 +458,16 @@ const GallerySection: React.FC = () => {
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-foreground mb-2">МАГАЗИН</h2>
           <div className="flex justify-end mb-8">
-            <span className="text-sm text-muted-foreground">ПОПУЛЯРНОЕ НАСЛЕДИЕ →</span>
+            <span className="text-sm text-muted-foreground"></span>
           </div>
         </div>
 
-        {/* Painting Series */}
-        <PaintingSeries 
-          title="Серия картин"
-          paintings={yaktuSeries}
-        />
-
-        <PaintingSeries 
-          title="Серия картин  »"
-          paintings={ladyTatarstanSeries}
-        />
-
-        <PaintingSeries 
-          title="Серия картин"
-          paintings={chelochekSeries}
-        />
-
-        <PaintingSeries 
-          title="Серия картин"
-          paintings={desertCollection}
-        />
+        {/* Все картины в одной сетке */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+          {allPaintings.map((painting) => (
+            <PaintingCard key={painting.id} {...painting} />
+          ))}
+        </div>
 
         {/* Final Button */}
         <div className="flex justify-center mt-16">
