@@ -24,7 +24,7 @@ const FooterContacts: React.FC = () => {
             {/* <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-luxury-dark hover:text-luxury-gold transition-colors">
               <Facebook className="h-8 w-8" />
             </a> */}
-            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-luxury-dark hover:text-luxury-gold transition-colors">
+            <a href="https://www.instagram.com/art.by.farzana?igsh=eG1vZHRvbXZvb2hw&utm_source=qr" target="_blank" rel="noopener noreferrer" className="text-luxury-dark hover:text-luxury-gold transition-colors">
               <Instagram className="h-8 w-8" />
             </a>
           

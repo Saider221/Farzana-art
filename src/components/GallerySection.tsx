@@ -22,39 +22,47 @@ const PaintingDetailsModal: React.FC<{
 }> = ({ painting, onClose, onBuy }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   
-  // Собираем все изображения (основное + дополнительные)
-  const allImages = [painting.image, ...(painting.additionalImages || [])];
+  // Собираем все медиа (основное + дополнительные)
+  const allMedia = [painting.image, ...(painting.additionalImages || [])];
+  
+  // Проверяем, является ли текущий элемент видео
+  const isVideo = (url: string) => {
+    return url.match(/\.(mp4|webm|ogg)$/i);
+  };
   
   // Функции для навигации по карусели
   const goToPrevious = () => {
     setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? allImages.length - 1 : prevIndex - 1
+      prevIndex === 0 ? allMedia.length - 1 : prevIndex - 1
     );
   };
   
   const goToNext = () => {
     setCurrentIndex((prevIndex) => 
-      prevIndex === allImages.length - 1 ? 0 : prevIndex + 1
+      prevIndex === allMedia.length - 1 ? 0 : prevIndex + 1
     );
   };
   
-  // Установка конкретного изображения
-  const setSelectedImage = (index: number) => {
+  // Установка конкретного медиа
+  const setSelectedMedia = (index: number) => {
     setCurrentIndex(index);
   };
   
-  // Автоматическая смена изображений каждые 5 секунд
+  // Автоматическая смена медиа каждые 5 секунд (только для изображений)
   useEffect(() => {
+    if (allMedia.length <= 1 || isVideo(allMedia[currentIndex])) return;
+    
     const interval = setInterval(() => {
       goToNext();
     }, 5000);
     
     return () => clearInterval(interval);
-  }, [currentIndex, allImages.length]);
+  }, [currentIndex, allMedia.length]);
   
   return (
-    <div className="fixed inset-0 bg-black/90 flex items-center justify-center z-50 p-2 sm:p-4 animate-fadeIn">
-      <div className="bg-white rounded-lg w-full max-w-3xl max-h-[90vh] overflow-y-auto animate-slideUp">
+    <div className="modal-container animate-fadeIn">
+      <div className="modal-backdrop" onClick={onClose}></div>
+      <div className="modal-content bg-white rounded-lg w-full max-w-3xl animate-slideUp">
         <div className="sticky top-0 bg-white border-b p-4 flex justify-between items-center">
           <h3 className="text-lg sm:text-xl font-bold">Детали картины</h3>
           <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8">
@@ -63,43 +71,53 @@ const PaintingDetailsModal: React.FC<{
         </div>
         <div className="p-4 sm:p-6">
           <div className="space-y-6">
-            {/* Основное изображение с каруселью */}
+            {/* Основное медиа с каруселью */}
             <div className="relative group">
               <div className="aspect-[3/4] overflow-hidden rounded-lg relative bg-gray-50 flex items-center justify-center">
-                <img 
-                  src={allImages[currentIndex]} 
-                  alt={`${painting.title} ${currentIndex + 1}`}
-                  className="w-full h-full object-contain transition-opacity duration-300"
-                />
+                {isVideo(allMedia[currentIndex]) ? (
+                  <video 
+                    src={allMedia[currentIndex]} 
+                    controls
+                    className="w-full h-full object-contain"
+                    autoPlay
+                    muted={false}
+                  />
+                ) : (
+                  <img 
+                    src={allMedia[currentIndex]} 
+                    alt={`${painting.title} ${currentIndex + 1}`}
+                    className="w-full h-full object-contain transition-opacity duration-300"
+                  />
+                )}
                 
                 {/* Навигационные кнопки */}
-                {allImages.length > 1 && (
+                {allMedia.length > 1 && (
                   <>
                     <button
                       onClick={goToPrevious}
                       className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all opacity-0 hover:opacity-100 focus:opacity-100 group-hover:opacity-100"
-                      aria-label="Предыдущее изображение"
+                      aria-label="Предыдущее медиа"
                     >
                       <ChevronLeft className="h-5 w-5" />
                     </button>
                     <button
                       onClick={goToNext}
                       className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all opacity-0 hover:opacity-100 focus:opacity-100 group-hover:opacity-100"
-                      aria-label="Следующее изображение"
+                      aria-label="Следующее медиа"
                     >
                       <ChevronRight className="h-5 w-5" />
                     </button>
                     
                     {/* Индикаторы */}
                     <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-                      {allImages.map((_, index) => (
+                      {allMedia.map((media, index) => (
                         <button
                           key={index}
-                          onClick={() => setSelectedImage(index)}
+                          onClick={() => setSelectedMedia(index)}
                           className={`w-3 h-3 rounded-full transition-all ${
                             index === currentIndex ? 'bg-white scale-125' : 'bg-white/50'
                           }`}
-                          aria-label={`Показать изображение ${index + 1}`}
+                          aria-label={`Показать медиа ${index + 1}`}
                         />
                       ))}
                     </div>
@@ -108,12 +126,12 @@ const PaintingDetailsModal: React.FC<{
               </div>
             </div>
             
-            {/* Миниатюры изображений внизу */}
-            {allImages.length > 1 && (
+            {/* Миниатюры медиа внизу */}
+            {allMedia.length > 1 && (
               <div className="pt-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">Другие изображения:</h4>
+                <h4 className="text-sm font-medium text-gray-700 mb-2">Другие медиа:</h4>
                 <div className="flex space-x-2 overflow-x-auto pb-2">
-                  {allImages.map((img, index) => (
+                  {allMedia.map((media, index) => (
                     <div 
                       key={index}
                       className={`flex-shrink-0 w-20 h-20 overflow-hidden rounded cursor-pointer border-2 transition-all ${
@@ -121,13 +139,19 @@ const PaintingDetailsModal: React.FC<{
                           ? 'border-luxury-gold shadow-md' 
                           : 'border-transparent hover:border-luxury-gold/50'
                       }`}
-                      onClick={() => setSelectedImage(index)}
+                      onClick={() => setSelectedMedia(index)}
                     >
-                      <img 
-                        src={img} 
-                        alt={`${painting.title} ${index + 1}`}
-                        className="w-full h-full object-cover hover:opacity-90 transition-opacity"
-                      />
+                      {isVideo(media) ? (
+                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                          <span className="text-xs text-gray-600">Видео</span>
+                        </div>
+                      ) : (
+                        <img 
+                          src={media} 
+                          alt={`${painting.title} ${index + 1}`}
+                          className="w-full h-full object-cover hover:opacity-90 transition-opacity"
+                        />
+                      )}
                     </div>
                   ))}
                 </div>
@@ -394,9 +418,9 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 7,
-      image: '/pocel.png',
+      image: '/cartina7iz1.png',
       additionalImages: [
-      '/pocel.png', 
+      
 
       ],
       title: "Поцелуй",
@@ -419,8 +443,7 @@ const GallerySection: React.FC = () => {
       id: 9,
       image: '/cartina9iz5.png',
       additionalImages: [
-        '/cartina12iz1.png',
-        '/cartina12iz2.png'
+
       ],
       title: "Сура Аль-Фатиха.",
       dimensions: "100 × 70 × 3см | холст",
@@ -443,23 +466,21 @@ const GallerySection: React.FC = () => {
     },    
     {
       id: 11,
-      image: '/cartina14iz1.png',
+      image: '/cartina11iz1.png',
       additionalImages: [
-        '/cartina15iz1.png',
-        '/cartina15iz2.jpg'
+        '/cartina11video1.mp4',        
       ],
       title: "Молитва",
-      dimensions: "80 × 60 × 3см | холст",
+      dimensions: "50 × 40 × 3см | акрил",
       price: "10 000,00 ₽",
-      description: "Картина «Задание» выполнена в технике акриловой живописи. Размер 80 × 60 × 3см. Эта работа исследует тему вызова и испытания, которые человек проходит в своей жизни, стремясь к самореализации."
+      description: "Картина написана по мотивам суфийской мудрости «Некоторые мысли - те же молитвы. Есть мгновения, когда душа независимо от положения тела стоит на коленях»."
     },
     {
       id: 12,
-      image: '/cartina15iz5.png',
+      image: '/cartina12iz1.png',
       additionalImages: [
-        '/cartina16iz1.png',
-        '/cartina16iz2.jpg',
-        '/cartina16iz3.png'
+        '/cartina12iz2.png',
+        
       ],
       title: "Сумасшедший",
       dimensions: "Картина 50x40, акрил.",
@@ -468,10 +489,10 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 13,
-      image: '/cartina1iz1.png',
+      image: '/cartina13iz1.png',
       additionalImages: [
-        '/cartina1iz2.png',
-        '/cartina1iz3.png'
+        '/cartina13iz2.png',
+        
       ],
       title: "Рассвет",
       dimensions: "Картина 30x30, масло, текстурная паста.",
@@ -480,9 +501,9 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 14,
-      image: '/cartina1iz4.png',
+      image: '/cartina14iz1.png',
       additionalImages: [
-        '/cartina1iz5.png'
+        
       ],
       title: "Гость",
       dimensions: "80 × 60 × 3см | холст",
@@ -491,9 +512,11 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 15,
-      image: '/cartina1iz2.png',
+      image: '/cartina15iz1.png',
       additionalImages: [
-        '/cartina1iz3.png'
+        '/cartina15iz2.png',
+        '/cartina15iz5.png',
+        
       ],
       title: "Звездная ночь",
       dimensions: "Картина 30x40, копия картины Ван Гога.",
@@ -502,27 +525,15 @@ const GallerySection: React.FC = () => {
     },
     {
       id: 16,
-      image: '/cartina1iz3.png',
+      image: '/cartina16iz1.png',
       additionalImages: [
-        '/cartina1iz4.png',
-        '/cartina1iz5.png'
+        '/cartina16iz2.png',
+        '/cartina16iz3.png'
       ],
       title: "Три возраста женщины",
       dimensions: "Копия картины Густава Климта. Материалы: акрил, золотая поталь.",
       price: "15 000,00 ₽",
       description: "На полотне изображена молодая женщина со спящим ребёнком на руках — мирская Мадонна, сама погружённая в состояние, похожее на сон, пассивная, стилизованная, вплетённая в орнаментальный фон полотна."
-    },
-    {
-      id: 17,
-      image: '/cartina1iz5.png',
-      additionalImages: [
-        '/cartina1iz1.png',
-        '/cartina1iz2.png'
-      ],
-      title: "Пустыня",
-      dimensions: "Картина 50x40, текстурная паста, золотая поталь, акрил.",
-      price: "15 000,00 ₽",
-      description: "Картина написанная по мотивам сказки «Сын Адама»… Как же жалок сын Адама, которому поднять камень легче, чем простить…"
     }
   ];
 

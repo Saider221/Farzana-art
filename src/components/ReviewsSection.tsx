@@ -1,12 +1,10 @@
-import { setFips } from "crypto";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const reviews = [
   {
     image: "/commentarion1.png",
-    caption:
-      "”",
+    caption: "",
     frameBg: "bg-[#1f1a17]",
   },
   {
@@ -15,19 +13,18 @@ const reviews = [
     frameBg: "bg-[#1b1b1b]",
   },
   {
-    image: "/commentarion3.",
+    image: "/commentarion3.png",
     caption: "",
     frameBg: "bg-[#2a241f]",
   },
   {
-    image: "/commentarion4.",
-    
+    image: "/commentarion4.png",
+    caption: "",
     frameBg: "bg-[#b7aa93]",
   },
   {
-    image: "/commentarion5.",
-    caption:
-      "",
+    image: "/commentarion5.png",
+    caption: "",
     frameBg: "bg-[#b7aa93]",
   },
 ];
@@ -99,24 +96,26 @@ const ReviewsSection = () => {
     }, 300);
   };
 
-  // Получаем видимые отзывы для текущего слайда
+  
   const getVisibleReviews = () => {
     const visibleReviews = [];
     
-    
-    if (window.innerWidth < 640) {
-      visibleReviews.push(reviews[currentIndex]);
-    } 
    
-    else if (window.innerWidth < 1024) {
-      visibleReviews.push(reviews[currentIndex]);
-      visibleReviews.push(reviews[(currentIndex + 1) % reviews.length]);
-    } 
-    
-    else {
-      for (let i = 0; i < 4; i++) {
-        const index = (currentIndex + i) % reviews.length;
-        visibleReviews.push(reviews[index]);
+    if (typeof window !== 'undefined') {
+      if (window.innerWidth < 680) {
+        visibleReviews.push(reviews[currentIndex]);
+      } 
+     
+      else if (window.innerWidth < 1080) {
+        visibleReviews.push(reviews[currentIndex]);
+        visibleReviews.push(reviews[(currentIndex + 1) % reviews.length]);
+      } 
+      
+      else {
+        for (let i = 0; i < 4; i++) {
+          const index = (currentIndex + i) % reviews.length;
+          visibleReviews.push(reviews[index]);
+        }
       }
     }
     
@@ -147,12 +146,12 @@ const ReviewsSection = () => {
             <div 
               className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 justify-items-center transition-transform duration-300 ease-in-out ${
                 isAnimating ? 
-                  (direction === "right" ? "transform -translate-x-full" : "transform translate-x-full") : 
-                  "transform translate-x-0"
+                  (direction === "right" ? "-translate-x-full" : "translate-x-full") : 
+                  "translate-x-0"
               }`}
             >
               {visibleReviews.map((r, index) => (
-                <div key={`${r.caption}-${index}`} className="flex flex-col items-center">
+                <div key={`${r.image}-${index}`} className="flex flex-col items-center">
                   <PhoneMock image={r.image} frameBg={r.frameBg} />
                   <p className="mt-4 text-center text-sm text-luxury-beige/80 max-w-[220px]">
                     {r.caption}

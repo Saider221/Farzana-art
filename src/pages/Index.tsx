@@ -8,7 +8,7 @@ import ReviewsSection from "@/components/ReviewsSection";
 import DeliverySection from "@/components/DeliverySection";
 import ArtTerapy from "@/components/ArtTerapy";
 import ArtDeliveryInfo from "@/components/ArtDeliveryInfo";
-// import AboutSection from "@/components/AboutSection";
+import AboutSection from "@/components/AboutSection";
 import FooterContacts from "@/components/FooterContacts";
 import { Footer } from "react-day-picker";
 
@@ -26,7 +26,7 @@ const Index = () => {
         <ReviewsSection />
         <DeliverySection/>      
         <ArtDeliveryInfo />
-        {/* <AboutSection/> */}
+         <AboutSection/> 
         <FooterContacts/>
       </main>
     </div>
