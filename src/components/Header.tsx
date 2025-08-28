@@ -1,6 +1,7 @@
-import { Menu, Search, User, MessageCircle, Phone, X } from "lucide-react";
+import { Menu, Search, User, MessageCircle, Phone, X, Instagram } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState, useEffect } from "react";
+
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -83,7 +84,7 @@ const Header = () => {
                 <MessageCircle className="h-5 w-5" />
               </Button>
             </a>
-            <a href="https://t.me/ваш_ник" target="_blank" rel="noopener noreferrer">
+            <a href="https://t.me/farzana22041998" target="_blank" rel="noopener noreferrer">
               <Button variant="ghost" size="icon" className="text-luxury-gold hover:text-luxury-gold/80">
                 <Phone className="h-5 w-5" />
               </Button>
@@ -91,6 +92,11 @@ const Header = () => {
             <Button variant="ghost" size="icon" className="text-luxury-gold">
               <User className="h-5 w-5" />
             </Button>
+            <a href="https://www.instagram.com/art.by.farzana?igsh=eG1vZHRvbXZvb2hw&utm_source=qr" target="_blank" rel="noopener noreferrer">
+              <Button variant="ghost" size="icon" className="text-luxury-gold hover:text-luxury-gold/80">
+                <Instagram className="h-5 w-5" />
+              </Button>
+            </a>
           </div>
         </nav>
       </header>
