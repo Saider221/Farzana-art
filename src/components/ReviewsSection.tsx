@@ -1,5 +1,6 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useSwipeable } from "react-swipeable";
 
 const reviews = [
   {
@@ -124,6 +125,33 @@ const ReviewsSection = () => {
 
   const visibleReviews = getVisibleReviews();
 
+  // Обработчики свайпов
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
+  
+  const swipeHandlers = useSwipeable({
+    onSwipeStart: (eventData) => {
+      setTouchStart(eventData.absX);
+    },
+    onSwipedLeft: () => {
+      setSwipeDirection('left');
+      setTimeout(() => {
+        handleNext();
+        setSwipeDirection(null);
+      }, 150);
+    },
+    onSwipedRight: () => {
+      setSwipeDirection('right');
+      setTimeout(() => {
+        handlePrev();
+        setSwipeDirection(null);
+      }, 150);
+    },
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: false
+  } as any);
+
   return (
     <section id="reviews" className="py-20 overflow-hidden" style={{ backgroundColor: "hsl(var(--luxury-brown))" }}>
       <div className="max-w-7xl mx-auto px-4 sm:px-8">
@@ -131,7 +159,7 @@ const ReviewsSection = () => {
           ОТЗЫВЫ
         </h2>
 
-        <div className="relative">
+        <div className="relative" {...swipeHandlers}>
           {/* left arrow */}
           <button
             aria-label="prev"
@@ -147,6 +175,8 @@ const ReviewsSection = () => {
               className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 justify-items-center transition-transform duration-300 ease-in-out w-full ${
                 isAnimating ? 
                   (direction === "right" ? "-translate-x-full" : "translate-x-full") : 
+                  swipeDirection === 'left' ? '-translate-x-full' : 
+                  swipeDirection === 'right' ? 'translate-x-full' : 
                   "translate-x-0"
               }`}
             >

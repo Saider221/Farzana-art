@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import FixedPaymentForm from '@/components/FixedPaymentForm';
 import { X, ShoppingCart, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useSwipeable } from 'react-swipeable';
 
 interface Painting {
   image: string;
@@ -240,6 +241,33 @@ const PaintingDetailsPage: React.FC = () => {
     );
   };
   
+  // Обработчики свайпов
+  const [touchStart, setTouchStart] = useState(0);
+  const [touchEnd, setTouchEnd] = useState(0);
+  const [swipeDirection, setSwipeDirection] = useState<'left' | 'right' | null>(null);
+  
+  const swipeHandlers = useSwipeable({
+    onSwipeStart: (eventData) => {
+      setTouchStart(eventData.absX);
+    },
+    onSwipedLeft: () => {
+      setSwipeDirection('left');
+      setTimeout(() => {
+        goToNext();
+        setSwipeDirection(null);
+      }, 150);
+    },
+    onSwipedRight: () => {
+      setSwipeDirection('right');
+      setTimeout(() => {
+        goToPrevious();
+        setSwipeDirection(null);
+      }, 150);
+    },
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: false
+  } as any);
+  
   // Установка конкретного медиа
   const setSelectedMedia = (index: number) => {
     setCurrentIndex(index);
@@ -326,13 +354,16 @@ const PaintingDetailsPage: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Левая колонка - медиа */}
           <div className="space-y-6">
-            <div className="relative group">
+            <div className="relative group" {...swipeHandlers}>
               <div className="aspect-[3/4] overflow-hidden rounded-lg relative bg-gray-50 flex items-center justify-center">
                 {isVideo(allMedia[currentIndex]) ? (
                   <video 
                     src={allMedia[currentIndex]} 
                     controls
-                    className="w-full h-full object-contain"
+                    className={`w-full h-full object-contain transition-transform duration-300 ease-in-out ${
+                      swipeDirection === 'left' ? '-translate-x-full' : 
+                      swipeDirection === 'right' ? 'translate-x-full' : ''
+                    }`}
                     autoPlay
                     muted={false}
                   />
@@ -340,7 +371,10 @@ const PaintingDetailsPage: React.FC = () => {
                   <img 
                     src={allMedia[currentIndex]} 
                     alt={`${painting.title} ${currentIndex + 1}`}
-                    className="w-full h-full object-contain transition-opacity duration-300"
+                    className={`w-full h-full object-contain transition-transform duration-300 ease-in-out ${
+                      swipeDirection === 'left' ? '-translate-x-full' : 
+                      swipeDirection === 'right' ? 'translate-x-full' : ''
+                    }`}
                   />
                 )}
                 
