@@ -89,9 +89,6 @@ const Header = () => {
                 <Phone className="h-5 w-5" />
               </Button>
             </a>
-            <Button variant="ghost" size="icon" className="text-luxury-gold">
-              <User className="h-5 w-5" />
-            </Button>
             <a href="https://www.instagram.com/art.by.farzana?igsh=eG1vZHRvbXZvb2hw&utm_source=qr" target="_blank" rel="noopener noreferrer">
               <Button variant="ghost" size="icon" className="text-luxury-gold hover:text-luxury-gold/80">
                 <Instagram className="h-5 w-5" />

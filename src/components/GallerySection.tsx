@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import PaymentForm from '@/components/PaymentForm';
-import FixedPaymentForm from '@/components/FixedPaymentForm';
-import { X, ShoppingCart, ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface PaintingCardProps {
   image: string;
@@ -14,265 +12,23 @@ interface PaintingCardProps {
   additionalImages?: string[];
 }
 
-// Компонент модального окна с деталями картины
-const PaintingDetailsModal: React.FC<{ 
-  painting: PaintingCardProps; 
-  onClose: () => void; 
-  onBuy: () => void 
-}> = ({ painting, onClose, onBuy }) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
+const PaintingCard: React.FC<PaintingCardProps> = ({ image, title, dimensions, price, id }) => {
+  const navigate = useNavigate();
   
-  // Собираем все медиа (основное + дополнительные)
-  const allMedia = [painting.image, ...(painting.additionalImages || [])];
-  
-  // Проверяем, является ли текущий элемент видео
-  const isVideo = (url: string) => {
-    return url.match(/\.(mp4|webm|ogg)$/i);
-  };
-  
-  // Функции для навигации по карусели
-  const goToPrevious = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === 0 ? allMedia.length - 1 : prevIndex - 1
-    );
-  };
-  
-  const goToNext = () => {
-    setCurrentIndex((prevIndex) => 
-      prevIndex === allMedia.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-  
-  // Установка конкретного медиа
-  const setSelectedMedia = (index: number) => {
-    setCurrentIndex(index);
-  };
-  
-  // Автоматическая смена медиа каждые 5 секунд (только для изображений)
-  useEffect(() => {
-    if (allMedia.length <= 1 || isVideo(allMedia[currentIndex])) return;
-    
-    const interval = setInterval(() => {
-      goToNext();
-    }, 5000);
-    
-    return () => clearInterval(interval);
-  }, [currentIndex, allMedia.length]);
-  
-  return (
-    <div className="modal-container animate-fadeIn">
-      <div className="modal-backdrop" onClick={onClose}></div>
-      <div className="modal-content bg-white rounded-lg w-full max-w-3xl animate-slideUp">
-        <div className="sticky top-0 bg-white border-b p-4 flex justify-between items-center">
-          <h3 className="text-lg sm:text-xl font-bold">Детали картины</h3>
-          <Button variant="ghost" size="icon" onClick={onClose} className="h-8 w-8">
-            <X className="h-4 w-4" />
-          </Button>
-        </div>
-        <div className="p-4 sm:p-6">
-          <div className="space-y-6">
-            {/* Основное медиа с каруселью */}
-            <div className="relative group">
-              <div className="aspect-[3/4] overflow-hidden rounded-lg relative bg-gray-50 flex items-center justify-center">
-                {isVideo(allMedia[currentIndex]) ? (
-                  <video 
-                    src={allMedia[currentIndex]} 
-                    controls
-                    className="w-full h-full object-contain"
-                    autoPlay
-                    muted={false}
-                  />
-                ) : (
-                  <img 
-                    src={allMedia[currentIndex]} 
-                    alt={`${painting.title} ${currentIndex + 1}`}
-                    className="w-full h-full object-contain transition-opacity duration-300"
-                  />
-                )}
-                
-                {/* Навигационные кнопки */}
-                {allMedia.length > 1 && (
-                  <>
-                    <button
-                      onClick={goToPrevious}
-                      className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all opacity-0 hover:opacity-100 focus:opacity-100 group-hover:opacity-100"
-                      aria-label="Предыдущее медиа"
-                    >
-                      <ChevronLeft className="h-5 w-5" />
-                    </button>
-                    <button
-                      onClick={goToNext}
-                      className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black/30 hover:bg-black/50 text-white p-2 rounded-full transition-all opacity-0 hover:opacity-100 focus:opacity-100 group-hover:opacity-100"
-                      aria-label="Следующее медиа"
-                    >
-                      <ChevronRight className="h-5 w-5" />
-                    </button>
-                    
-                    {/* Индикаторы */}
-                    <div className="absolute bottom-4 left-0 right-0 flex justify-center space-x-2">
-                      {allMedia.map((media, index) => (
-                        <button
-                          key={index}
-                          onClick={() => setSelectedMedia(index)}
-                          className={`w-3 h-3 rounded-full transition-all ${
-                            index === currentIndex ? 'bg-white scale-125' : 'bg-white/50'
-                          }`}
-                          aria-label={`Показать медиа ${index + 1}`}
-                        />
-                      ))}
-                    </div>
-                  </>
-                )}
-              </div>
-            </div>
-            
-            {/* Миниатюры медиа внизу */}
-            {allMedia.length > 1 && (
-              <div className="pt-4">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">Другие медиа:</h4>
-                <div className="flex space-x-2 overflow-x-auto pb-2">
-                  {allMedia.map((media, index) => (
-                    <div 
-                      key={index}
-                      className={`flex-shrink-0 w-20 h-20 overflow-hidden rounded cursor-pointer border-2 transition-all ${
-                        index === currentIndex 
-                          ? 'border-luxury-gold shadow-md' 
-                          : 'border-transparent hover:border-luxury-gold/50'
-                      }`}
-                      onClick={() => setSelectedMedia(index)}
-                    >
-                      {isVideo(media) ? (
-                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                          <span className="text-xs text-gray-600">Видео</span>
-                        </div>
-                      ) : (
-                        <img 
-                          src={media} 
-                          alt={`${painting.title} ${index + 1}`}
-                          className="w-full h-full object-cover hover:opacity-90 transition-opacity"
-                        />
-                      )}
-                    </div>
-                  ))}
-                </div>
-              </div>
-            )}
-            
-            {/* Информация о картине */}
-            <div className="space-y-4 border-t pt-4">
-              <div>
-                <h2 className="text-xl sm:text-2xl font-bold text-foreground mb-1">{painting.title}</h2>
-                <p className="text-sm sm:text-base text-muted-foreground">{painting.dimensions}</p>
-              </div>
-              
-              {painting.description && (
-                <div className="prose max-w-none">
-                  <p className="text-foreground text-sm sm:text-base">{painting.description}</p>
-                </div>
-              )}
-              
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pt-2">
-                <span className="text-xl sm:text-2xl font-bold" style={{ color: 'hsl(var(--price-color))' }}>
-                  {painting.price}
-                </span>
-                <Button 
-                  onClick={onBuy}
-                  className="bg-luxury-gold hover:bg-luxury-gold/90 text-luxury-dark flex items-center gap-2 w-full sm:w-auto"
-                >
-                  <ShoppingCart className="h-4 w-4 sm:h-5 sm:w-5" />
-                  Купить
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className="p-4 border-t bg-gray-50">
-          <Button 
-            variant="outline" 
-            onClick={onClose}
-            className="w-full"
-          >
-            Закрыть
-          </Button>
-        </div>
-      </div>
-    </div>
-  );
-};
-
-const PaintingCard: React.FC<PaintingCardProps> = ({ image, title, dimensions, price, id, description, additionalImages }) => {
-  const [showPayment, setShowPayment] = useState(false);
-  const [showDetails, setShowDetails] = useState(false);
-  
-  // Убедимся, что additionalImages - это массив
-  const safeAdditionalImages = Array.isArray(additionalImages) ? additionalImages : [];
-  
-  const handleBuyClick = () => {
-    setShowPayment(true);
-  };
-
   const handleViewDetails = () => {
-    setShowDetails(true);
+    // Сохраняем текущую позицию прокрутки перед переходом
+    const scrollPosition = window.scrollY;
+    navigate(`/painting/${id}`, { state: { from: 'gallery', scrollPosition } });
   };
 
-  // Если открыта форма оплаты, показываем её
-  if (showPayment) {
-    // Извлекаем числовое значение цены
-    const numericPrice = parseFloat(price.replace(/\s/g, '').replace('₽', ''));
-    
-    return (
-      <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-        <div className="bg-white rounded-lg max-w-md w-full">
-          <div className="p-4 border-b">
-            <h3 className="text-xl font-bold">Оплата картины</h3>
-          </div>
-          <div className="p-4">
-            <FixedPaymentForm 
-              paintingId={id}
-              amount={numericPrice}
-              description={`Покупка картины: ${title}`}
-              title={title}
-            />
-          </div>
-          <div className="p-4 border-t">
-            <Button 
-              variant="outline" 
-              onClick={() => setShowPayment(false)}
-              className="w-full"
-            >
-              Закрыть
-            </Button>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
-  // Если открыто модальное окно с деталями, показываем его
-  if (showDetails) {
-    // Создаем объект картины с правильными данными
-    const paintingData = {
-      image,
-      title,
-      dimensions,
-      price,
-      id,
-      description,
-      additionalImages: safeAdditionalImages
-    };
-    
-    return (
-      <PaintingDetailsModal 
-        painting={paintingData}
-        onClose={() => setShowDetails(false)} 
-        onBuy={handleBuyClick} 
-      />
-    );
-  }
+  const handleBuyClick = () => {
+    // Можно добавить логику для прямой покупки или перенаправления на страницу с деталями
+    const scrollPosition = window.scrollY;
+    navigate(`/painting/${id}`, { state: { from: 'gallery', scrollPosition } });
+  };
 
   return (
     <div className="bg-card rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300">
-      {/* Добавляем обработчик клика на всю карточку для открытия деталей */}
       <div 
         className="aspect-[3/4] overflow-hidden cursor-pointer"
         onClick={handleViewDetails}
@@ -325,7 +81,6 @@ const PaintingSeries: React.FC<PaintingSeriesProps> = ({ title, paintings, showV
         >
           Смотреть все
         </Button>
-        
       </div>
     )}
   </div>
@@ -420,7 +175,6 @@ const GallerySection: React.FC = () => {
       id: 7,
       image: '/cartina7iz1.png',
       additionalImages: [
-      
 
       ],
       title: "Поцелуй",
@@ -443,7 +197,6 @@ const GallerySection: React.FC = () => {
       id: 9,
       image: '/cartinasira.jpg',
       additionalImages: [
-        
 
       ],
       title: "Сура Аль-Фатиха.",
@@ -544,7 +297,7 @@ const GallerySection: React.FC = () => {
     <section id="gallery" className="gallery-section py-16 px-6 relative overflow-hidden" 
              style={{ backgroundColor: 'hsl(var(--gallery-bg))', backgroundImage: 'url(/)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
       {/* Background overlay for better text readability */}
-      <div className="absolute inset-0 bg-background/70 "></div>
+      <div className="absolute inset-0 bg-background/70"></div>
       <div className="max-w-7xl mx-auto relative z-10">
         {/* Header */}
         <div className="text-center mb-12">
