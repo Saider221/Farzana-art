@@ -11,7 +11,7 @@ const HeroSection = () => {
              style={{ backgroundImage: 'url(/fonherosection.png)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
       {/* Background overlay for better text readability */}
       <div className="absolute inset-0 bg-background/80 backdrop-blur-sm"></div>
-      {/* Decorative elements */}
+      {/* Decorative elements - hidden on mobile to prevent overflow */}
       <div className="absolute top-10 left-10 sm:top-20 sm:left-20 text-luxury-gold/30 hidden md:block">
         <Star className="h-6 w-6 sm:h-8 sm:w-8" />
       </div>
@@ -73,11 +73,11 @@ const HeroSection = () => {
                   </div>
                 </div>
                 
-                {/* Decorative corner elements */}
-                <div className="absolute -top-3 -left-3 w-8 h-8 border-l-2 border-t-2 border-luxury-gold/60 rounded-tl-xl"></div>
-                <div className="absolute -top-3 -right-3 w-8 h-8 border-r-2 border-t-2 border-luxury-gold/60 rounded-tr-xl"></div>
-                <div className="absolute -bottom-3 -left-3 w-8 h-8 border-l-2 border-b-2 border-luxury-gold/60 rounded-bl-xl"></div>
-                <div className="absolute -bottom-3 -right-3 w-8 h-8 border-r-2 border-b-2 border-luxury-gold/60 rounded-br-xl"></div>
+                {/* Decorative corner elements - hidden on mobile to prevent overflow */}
+                <div className="absolute -top-3 -left-3 w-8 h-8 border-l-2 border-t-2 border-luxury-gold/60 rounded-tl-xl hidden sm:block"></div>
+                <div className="absolute -top-3 -right-3 w-8 h-8 border-r-2 border-t-2 border-luxury-gold/60 rounded-tr-xl hidden sm:block"></div>
+                <div className="absolute -bottom-3 -left-3 w-8 h-8 border-l-2 border-b-2 border-luxury-gold/60 rounded-bl-xl hidden sm:block"></div>
+                <div className="absolute -bottom-3 -right-3 w-8 h-8 border-r-2 border-b-2 border-luxury-gold/60 rounded-br-xl hidden sm:block"></div>
                 
                 {/* Subtle glow effect */}
                 <div className="absolute inset-0 rounded-xl shadow-[0_0_30px_rgba(180,140,80,0.3)]"></div>

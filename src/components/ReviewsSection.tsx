@@ -125,9 +125,9 @@ const ReviewsSection = () => {
   const visibleReviews = getVisibleReviews();
 
   return (
-    <section id="reviews" className="py-20" style={{ backgroundColor: "hsl(var(--luxury-brown))" }}>
-      <div className="max-w-7xl mx-auto px-8">
-        <h2 className="text-4xl md:text-5xl font-semibold text-luxury-beige mb-10">
+    <section id="reviews" className="py-20 overflow-hidden" style={{ backgroundColor: "hsl(var(--luxury-brown))" }}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-8">
+        <h2 className="text-4xl md:text-5xl font-semibold text-luxury-beige mb-10 text-center">
           ОТЗЫВЫ
         </h2>
 
@@ -144,7 +144,7 @@ const ReviewsSection = () => {
           {/* grid of phones with animation */}
           <div className="relative overflow-hidden">
             <div 
-              className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 justify-items-center transition-transform duration-300 ease-in-out ${
+              className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 justify-items-center transition-transform duration-300 ease-in-out w-full ${
                 isAnimating ? 
                   (direction === "right" ? "-translate-x-full" : "translate-x-full") : 
                   "translate-x-0"

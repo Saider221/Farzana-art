@@ -294,7 +294,7 @@ const GallerySection: React.FC = () => {
   ];
 
   return (
-    <section id="gallery" className="gallery-section py-16 px-6 relative overflow-hidden" 
+    <section id="gallery" className="gallery-section py-16 px-4 sm:px-6 relative overflow-hidden" 
              style={{ backgroundColor: 'hsl(var(--gallery-bg))', backgroundImage: 'url(/)', backgroundSize: 'cover', backgroundPosition: 'center' }}>
       {/* Background overlay for better text readability */}
       <div className="absolute inset-0 bg-background/70"></div>

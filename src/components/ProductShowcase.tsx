@@ -23,7 +23,7 @@ const ProductShowcase = () => {
   };
 
   return (
-    <section id="showcase" className="py-20 bg-luxury-beige text-luxury-dark">
+    <section id="showcase" className="py-20 bg-luxury-beige text-luxury-dark overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6">
@@ -36,7 +36,7 @@ const ProductShowcase = () => {
         </div>
         
         <div className="relative flex justify-center">
-          <div className="text-6xl sm:text-7xl lg:text-9xl font-bold text-luxury-dark/10 absolute top-0 left-0 z-0">
+          <div className="text-6xl sm:text-7xl lg:text-9xl font-bold text-luxury-dark/10 absolute top-0 left-0 z-0 overflow-hidden">
             
           </div>
           

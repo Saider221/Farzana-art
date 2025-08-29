@@ -12,14 +12,14 @@ const AboutOrnament = () => (
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-20 px-6 relative" style={{ backgroundColor: 'hsl(var(--about-bg))' }}>
+    <section id="about" className="py-20 px-4 sm:px-6 relative overflow-hidden" style={{ backgroundColor: 'hsl(var(--about-bg))' }}>
       
 
         {/* About Me Section */}
         <div className="grid md:grid-cols-2 gap-16 items-start mb-20">
           {/* Profile Image */}
           <div className="relative flex justify-center">
-            <div className="absolute top-0 right-0" style={{ color: 'hsl(var(--about-accent))' }}>
+            <div className="absolute top-0 right-0 hidden md:block" style={{ color: 'hsl(var(--about-accent))' }}>
               
               <AboutOrnament />
             </div>
@@ -33,7 +33,7 @@ const AboutSection = () => {
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="absolute bottom-10 left-10" style={{ color: 'hsl(var(--about-accent))' }}>
+            <div className="absolute bottom-10 left-10 hidden md:block" style={{ color: 'hsl(var(--about-accent))' }}>
               <AboutOrnament />
             </div>
           </div>
@@ -69,23 +69,22 @@ const AboutSection = () => {
 
               <p className="leading-relaxed">
                 <span style={{ color: 'hsl(var(--about-accent))' }} className="font-semibold">Традиции играют огромное<br />
-                значение в моем искусстве</span> -<br />
-                будь то язык, национальная кухня<br />
-                или узоры, которые украшают<br />
-                предметы интерьера, одежду и<br />
+                значение в моем искусстве</span> -
+                будь то язык, национальная кухня
+                или узоры, которые украшают
+                предметы интерьера, одежду и
                 обувь.
               </p>
 
               <p className="leading-relaxed">
-                <span className="font-semibold">Мои картины созданы для того, чтобы</span> не только сохранить<br />
-                культурное наследие, но и <span className="font-semibold">передать теплые воспоминания о его<br />
+                <span className="font-semibold">Мои картины созданы для того, чтобы</span> не только сохранить
+                культурное наследие, но и <span className="font-semibold">передать теплые воспоминания о его
                 детстве</span>. Я верю, наши дома могут передавать нашу идентичность.
               </p>
             </div>
           </div>
         </div>
 
-        
         
       
     </section>

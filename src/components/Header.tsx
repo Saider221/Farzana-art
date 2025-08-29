@@ -143,9 +143,14 @@ const Header = () => {
                       <MessageCircle className="h-5 w-5" />
                     </Button>
                   </a>
-                  <a href="https://t.me/ваш_ник" target="_blank" rel="noopener noreferrer">
+                  <a href="https://t.me/farzana22041998" target="_blank" rel="noopener noreferrer">
                     <Button variant="outline" size="icon" className="text-luxury-gold border-luxury-gold">
                       <Phone className="h-5 w-5" />
+                    </Button>
+                  </a>
+                  <a href="https://www.instagram.com/art.by.farzana?igsh=eG1vZHRvbXZvb2hw&utm_source=qr" target="_blank" rel="noopener noreferrer">
+                    <Button variant="outline" size="icon" className="text-luxury-gold border-luxury-gold">
+                      <Instagram className="h-5 w-5" />
                     </Button>
                   </a>
                 </div>

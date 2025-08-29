@@ -5,7 +5,7 @@ const FooterContacts: React.FC = () => {
   return (
     <footer id="contacts" className="w-full">
       {/* Верхняя секция: Контакты */}
-      <section className="bg-luxury-beige py-10 px-4 text-center relative">
+      <section className="bg-luxury-beige py-10 px-4 text-center relative overflow-hidden">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-luxury-dark">КОНТАКТЫ</h2>
           
@@ -20,7 +20,7 @@ const FooterContacts: React.FC = () => {
             </div>
           </div>
           
-          <div className="flex justify-center gap-6 mb-8">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-6 mb-8">
             {/* <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-luxury-dark hover:text-luxury-gold transition-colors">
               <Facebook className="h-8 w-8" />
             </a> */}
