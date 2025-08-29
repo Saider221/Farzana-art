@@ -9,22 +9,58 @@ const app = express();
 // Встроенный модуль crypto в Node.js
 const crypto = require('crypto');
 
+// Middleware для rate limiting
+const { generalLimiter, paymentLimiter } = require('./middleware/rateLimiter');
+// Middleware для логирования безопасности
+const securityLogger = require('./middleware/securityLogger');
+
 app.use(helmet());
+// Определяем разрешенные origins в зависимости от среды
+const allowedOrigins = process.env.NODE_ENV === 'production' 
+  ? ['https://your-domain.vercel.app'] // Замените на ваш домен
+  : ['http://localhost:8080', 'http://localhost:5173', 'http://localhost:3000'];
+
 app.use(cors({
-  origin: ['http://localhost:8080', 'http://localhost:5173', 'http://localhost:3000'],
+  origin: function (origin, callback) {
+    // Разрешаем запросы без origin (например, мобильные приложения, curl)
+    if (!origin) return callback(null, true);
+    
+    if (allowedOrigins.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' })); // Ограничение размера JSON
+app.use(express.urlencoded({ extended: true, limit: '10mb' })); // Ограничение размера URL encoded данных
+
+// Применяем security logger ко всем запросам
+app.use(securityLogger);
+
+// Применяем rate limiting ко всем запросам
+app.use(generalLimiter);
 
 // --- API endpoints ---
 
 // Получение списка картин
 app.get('/api/paintings', async (req, res) => {
   try {
-    const paintings = await prisma.painting.findMany();
+    const paintings = await prisma.painting.findMany({
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        imageUrl: true,
+        instagramLink: true,
+        price: true,
+        createdAt: true
+      }
+    });
     res.json(paintings);
   } catch (error) {
+    console.error('Failed to fetch paintings:', error);
     res.status(500).json({ error: 'Failed to fetch paintings' });
   }
 });
@@ -33,8 +69,24 @@ app.get('/api/paintings', async (req, res) => {
 app.get('/api/paintings/:id', async (req, res) => {
   try {
     const { id } = req.params;
+    
+    // Валидация ID
+    const paintingId = parseInt(id);
+    if (isNaN(paintingId)) {
+      return res.status(400).json({ error: 'Invalid painting ID' });
+    }
+    
     const painting = await prisma.painting.findUnique({
-      where: { id: parseInt(id) }
+      where: { id: paintingId },
+      select: {
+        id: true,
+        title: true,
+        description: true,
+        imageUrl: true,
+        instagramLink: true,
+        price: true,
+        createdAt: true
+      }
     });
     
     if (!painting) {
@@ -43,12 +95,13 @@ app.get('/api/paintings/:id', async (req, res) => {
     
     res.json(painting);
   } catch (error) {
+    console.error('Failed to fetch painting:', error);
     res.status(500).json({ error: 'Failed to fetch painting' });
   }
 });
 
 // Инициализация платежа через Robokassa (демо режим)
-app.post('/api/payment/init', (req, res) => {
+app.post('/api/payment/init', paymentLimiter, (req, res) => {
   try {
     const { 
       amount, 
@@ -64,11 +117,33 @@ app.post('/api/payment/init', (req, res) => {
       return res.status(400).json({ error: 'Missing required parameters' });
     }
 
+    // Валидация данных
+    const amountFloat = parseFloat(amount);
+    if (isNaN(amountFloat) || amountFloat <= 0) {
+      return res.status(400).json({ error: 'Invalid amount' });
+    }
+
+    // Проверка длины orderId
+    if (orderId.length > 50) {
+      return res.status(400).json({ error: 'Order ID too long' });
+    }
+
+    // Проверка длины description
+    if (description.length > 1000) {
+      return res.status(400).json({ error: 'Description too long' });
+    }
+
     const merchantLogin = process.env.ROBOKASSA_LOGIN;
     const password1 = process.env.ROBOKASSA_PASSWORD1;
 
+    // Проверка наличия необходимых переменных окружения
+    if (!merchantLogin || !password1) {
+      console.error('Robokassa credentials not configured');
+      return res.status(500).json({ error: 'Payment system not configured' });
+    }
+
     // Формируем строку для хеширования
-    const signatureString = `${merchantLogin}:${amount}:${orderId}:${password1}`;
+    const signatureString = `${merchantLogin}:${amountFloat.toFixed(2)}:${orderId}:${password1}`;
     
     // Вычисляем хеш (используем SHA256 как в вашем случае)
     const signature = crypto
@@ -79,18 +154,21 @@ app.post('/api/payment/init', (req, res) => {
     // Формируем URL для редиректа на Robokassa
     const redirectUrl = `https://auth.robokassa.ru/Merchant/Index.aspx?` +
       `MerchantLogin=${encodeURIComponent(merchantLogin)}&` +
-      `OutSum=${encodeURIComponent(amount)}&` +
+      `OutSum=${encodeURIComponent(amountFloat.toFixed(2))}&` +
       `InvId=${encodeURIComponent(orderId)}&` +
       `Description=${encodeURIComponent(description)}&` +
       `SignatureValue=${signature}&` +
       `Culture=${culture}&` +
       `IsTest=${isTest}`;
 
+    // Логирование платежа для мониторинга
+    console.log(`Payment initialized: Order ${orderId}, Amount ${amountFloat.toFixed(2)}`);
+
     res.json({ 
       status: 'success',
       redirectUrl,
       orderId,
-      amount
+      amount: amountFloat.toFixed(2)
     });
   } catch (error) {
     console.error('Payment init error:', error);
@@ -99,13 +177,26 @@ app.post('/api/payment/init', (req, res) => {
 });
 
 // Обработка результата оплаты (Result URL)
-app.post('/api/payment/result', (req, res) => {
+app.post('/api/payment/result', paymentLimiter, (req, res) => {
   try {
     const { OutSum, InvId, SignatureValue } = req.body;
     
+    // Логирование входящих данных
     console.log(`Received payment result for order ${InvId}, amount: ${OutSum}`);
     
+    // Проверка обязательных параметров
+    if (!OutSum || !InvId || !SignatureValue) {
+      console.log('Missing required parameters in payment result');
+      return res.status(400).send('Missing required parameters');
+    }
+    
     const password2 = process.env.ROBOKASSA_PASSWORD2;
+    
+    // Проверка наличия необходимых переменных окружения
+    if (!password2) {
+      console.error('Robokassa password2 not configured');
+      return res.status(500).send('Payment system not configured');
+    }
     
     // Формируем строку для хеширования
     const signatureString = `${OutSum}:${InvId}:${password2}`;
@@ -125,7 +216,10 @@ app.post('/api/payment/result', (req, res) => {
       return res.status(400).send('Invalid signature');
     }
     
-    
+    // Здесь можно добавить дополнительную логику:
+    // 1. Проверку, не был ли уже обработан этот платеж
+    // 2. Обновление статуса заказа в базе данных
+    // 3. Отправку уведомлений
     
     console.log(`Payment successful for order ${InvId}, amount: ${OutSum}`);
     
@@ -138,11 +232,17 @@ app.post('/api/payment/result', (req, res) => {
 });
 
 // Обработка успешной оплаты (Success URL)
-app.get('/api/payment/success', (req, res) => {
+app.get('/api/payment/success', paymentLimiter, (req, res) => {
   try {
     const { OutSum, InvId } = req.query;
     
-   
+    // Проверка обязательных параметров
+    if (!OutSum || !InvId) {
+      return res.status(400).json({ error: 'Missing required parameters' });
+    }
+    
+    // Логирование успешного платежа
+    console.log(`Payment success for order ${InvId}, amount: ${OutSum}`);
     
     res.json({ 
       status: 'success',
@@ -156,12 +256,18 @@ app.get('/api/payment/success', (req, res) => {
   }
 });
 
-
-app.get('/api/payment/fail', (req, res) => {
+// Обработка отмены оплаты (Fail URL)
+app.get('/api/payment/fail', paymentLimiter, (req, res) => {
   try {
     const { OutSum, InvId } = req.query;
     
+    // Проверка обязательных параметров
+    if (!OutSum || !InvId) {
+      return res.status(400).json({ error: 'Missing required parameters' });
+    }
     
+    // Логирование отмены платежа
+    console.log(`Payment failed for order ${InvId}, amount: ${OutSum}`);
     
     res.json({ 
       status: 'fail',
@@ -175,5 +281,4 @@ app.get('/api/payment/fail', (req, res) => {
   }
 });
 
-app.listen(3001, () => console.log('Server running on port 3001')); 
- 
+app.listen(3001, () => console.log('Server running on port 3001'));
