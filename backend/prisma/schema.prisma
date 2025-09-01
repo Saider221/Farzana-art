@@ -8,11 +8,10 @@ generator client {
 }
 
 model Painting {
-  id            Int      @id @default(autoincrement())
-  title         String
-  description   String?
-  imageUrl      String
-  instagramLink String?
-  price         Float
-  createdAt     DateTime @default(now())
+  id
+  image 
+  title
+  dimensions
+  price
+  description
 } 
