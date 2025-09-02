@@ -5,7 +5,7 @@ const FooterContacts: React.FC = () => {
   return (
     <footer id="contacts" className="w-full">
       {/* Верхняя секция: Контакты */}
-      <section className="bg-luxury-beige py-10 px-4 text-center relative overflow-hidden">
+      <section className="bg-luxury-beige py-10 px-4 text-center relative overflow-hidden ">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold mb-6 text-luxury-dark">КОНТАКТЫ</h2>
           
@@ -15,7 +15,7 @@ const FooterContacts: React.FC = () => {
               <span className="text-lg">+7 908 680-09-46</span>
             </div>
             <div className="flex items-center gap-2 text-luxury-dark">
-              <Mail className="h-5 w-5" />
+              <Mail className="h-5 w-5 mb-1" />
               <span className="text-lg">kadyrova.farzana.98@mail.ru</span>
             </div>
           </div>

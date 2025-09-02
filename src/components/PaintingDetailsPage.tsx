@@ -355,7 +355,7 @@ const PaintingDetailsPage: React.FC = () => {
           {/* Левая колонка - медиа */}
           <div className="space-y-6">
             <div className="relative group" {...swipeHandlers}>
-              <div className="aspect-[3/4] overflow-hidden rounded-lg relative bg-gray-50 flex items-center justify-center">
+              <div className="aspect-[3/4] overflow-hidden rounded-lg relative flex items-center justify-center">
                 {isVideo(allMedia[currentIndex]) ? (
                   <video 
                     src={allMedia[currentIndex]} 
@@ -422,15 +422,15 @@ const PaintingDetailsPage: React.FC = () => {
                   {allMedia.map((media, index) => (
                     <div 
                       key={index}
-                      className={`flex-shrink-0 w-20 h-20 overflow-hidden rounded cursor-pointer border-2 transition-all ${
+                      className={`flex-shrink-0 w-20 h-20 overflow-hidden rounded cursor-pointer transition-all ${
                         index === currentIndex 
-                          ? 'border-luxury-gold shadow-md' 
-                          : 'border-transparent hover:border-luxury-gold/50'
+                          ? 'ring-2 ring-luxury-gold shadow-md' 
+                          : 'hover:ring-1 hover:ring-luxury-gold/50'
                       }`}
                       onClick={() => setSelectedMedia(index)}
                     >
                       {isVideo(media) ? (
-                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                        <div className="w-full h-full flex items-center justify-center">
                           <span className="text-xs text-gray-600">Видео</span>
                         </div>
                       ) : (
